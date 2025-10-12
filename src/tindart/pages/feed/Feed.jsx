@@ -37,7 +37,7 @@ export const Feed = () => {
           "&::-webkit-scrollbar": {display: "none"}
         }}
         variant="quilted"
-        cols={4}
+        cols={6}
         rowHeight={250}
       >
         {itemData.map((item) => (
@@ -55,7 +55,7 @@ export const Feed = () => {
               {...srcset(item.img, 500, item.rows, item.cols)}
               alt={item.title}
               loading="lazy"
-              style={{ borderRadius: "8px" }}
+              style={{ borderRadius: "8px", padding: "4.5px" }}
             />
           </ImageListItem>
         ))}
