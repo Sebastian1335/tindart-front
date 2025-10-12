@@ -34,21 +34,31 @@ export const Register = () => {
   return (
     <>
       <div className={styles.LoginPage}>
-      <h1>{onLoading == true ? "Cargando" : "Login"}</h1>
       <div className={styles.LoginBox}>
         <form>
+          <h1>{onLoading == true ? "Cargando" : "Registro"}</h1>
+          <h3>Correo Electronico</h3>
           <input 
             type="text" 
-            placeholder="usuario o correo electrónico"
+            placeholder="Correo electrónico"
             name="usuario"
             onChange={onInputChange}
-          />
+            />
+          <h3>Usuario</h3>
+          <input 
+            type="text" 
+            placeholder="Usuario"
+            name="usuario"
+            onChange={onInputChange}
+            />
+          <h3>Contraseña</h3>
           <input 
             type="password" 
             placeholder="contraseña"
             name="password"
             onChange={onInputChange}
-          />
+            />
+          <h3>Confirmar Contraseña</h3>
           <input 
             type="password" 
             placeholder="confirmar contraseña"
@@ -58,7 +68,7 @@ export const Register = () => {
           <button type="submit" onClick={onSubmitForm}>Registrarse</button>
           <p className={styles.RegisterText}>
             ¿Ya tienes una cuenta?{" "}
-            <Link to={"/auth/login"}>
+            <Link to={"/auth/login"} className="">
               Inicia Sesión
             </Link>
           </p>

@@ -31,17 +31,18 @@ export const Login = () => {
 
 
   return (
-    <>
       <div className={styles.LoginPage}>
-      <h1>{onLoading == true ? "Cargando" : "Login"}</h1>
       <div className={styles.LoginBox}>
         <form>
+          <h1>{onLoading == true ? "Cargando" : "Ingresar"}</h1>
+          <h3>Correo Electrónico</h3>
           <input 
             type="text" 
             placeholder="usuario o correo electrónico"
             name="usuario"
             onChange={onInputChange}
           />
+          <h3>Contraseña</h3>
           <input 
             type="password" 
             placeholder="contraseña"
@@ -52,12 +53,11 @@ export const Login = () => {
         </form>
         <p className={styles.RegisterText}>
           ¿No tienes cuenta?{" "}
-          <Link to={"/auth/register"}>
+          <Link to={"/auth/register"} className={""}>
             Crea una aquí
           </Link>
         </p>
       </div>
     </div>
-    </>
   )
 }

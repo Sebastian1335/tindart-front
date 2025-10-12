@@ -1,0 +1,24 @@
+/* global.css */
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #2E2D34;
+}
+/* Reset básico opcional */
+* {
+  box-sizing: inherit;
+}
+
+
+
+/* Otros estilos globales */
+a {
+  text-decoration: none;
+  color: inherit;
+}

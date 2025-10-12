@@ -1,24 +1,39 @@
 .LoginPage {
-  height: 100vh;
+  min-height: 100vh;
+  min-width: 100vw;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   background: linear-gradient(135deg, #667eea, #764ba2);
+  background-image: url("https://wallpapers.com/images/featured/arte-moderno-eua0t4x1os9lp8vr.jpg");
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .LoginPage h1 {
-  color: #fff;
+  color: #FFFFFF;
   margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
+.LoginPage h3 {
+  color: #FFFFFF;
+  margin-bottom: 0px;
+  margin-left: 25%;
+  margin-right: auto;
+  font-size: 24;
+  font: "Poppings";
+}
+
+
 .LoginBox {
-  background: #fff;
+  background: #2E2D34;
   padding: 30px 25px;
   border-radius: 15px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-  width: 320px;
+  width: 48%;
+  height: 100vh;
+  margin-left: 52%;
 }
 
 .LoginBox form {
@@ -28,24 +43,33 @@
 }
 
 .LoginBox input {
-  padding: 12px;
-  border: 1px solid #ccc;
+  background-color: #1B1B1F;
+  padding: 15px;
+  border: 1px solid #1B1B1F;
   border-radius: 10px;
   font-size: 14px;
   outline: none;
   transition: all 0.3s ease;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  
 }
 
 .LoginBox input:focus {
   border-color: #667eea;
-  box-shadow: 0 0 6px rgba(102, 126, 234, 0.5);
+  box-shadow: 0 0 10px rgb(255, 255, 255);
 }
 
 .LoginBox button {
   padding: 12px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10%;
   border: none;
+  width: 50%;
   border-radius: 10px;
-  background: #667eea;
+  background: linear-gradient(90deg, #E36B63, #BA45E8);
   color: #fff;
   font-size: 15px;
   font-weight: bold;
@@ -55,4 +79,10 @@
 
 .LoginBox button:hover {
   background: #5563c1;
+}
+
+.RegisterText {
+  margin-top: 10%;
+  margin-left: 25%;
+  color: #fff;
 }
