@@ -1,6 +1,3 @@
-"use client"
-
-import * as React from "react"
 import { ImageList, ImageListItem, Modal, Box } from "@mui/material"
 import "./Feed.css"
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -9,6 +6,7 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 import ShareIcon from '@mui/icons-material/Share';
 import CloseIcon from '@mui/icons-material/Close';
 import SendIcon from '@mui/icons-material/Send';
+import { useState } from "react";
 
 function srcset(image, size, rows = 1, cols = 1) {
   return {
@@ -18,14 +16,14 @@ function srcset(image, size, rows = 1, cols = 1) {
 }
 
 export const Feed = () => {
-  const [open, setOpen] = React.useState(false)
-  const [selectedPost, setSelectedPost] = React.useState(null)
-  const [imageModalOpen, setImageModalOpen] = React.useState(false)
-  const [commentText, setCommentText] = React.useState("")
-  const [postLiked, setPostLiked] = React.useState(false)
-  const [postBookmarked, setPostBookmarked] = React.useState(false)
-  const [commentLikes, setCommentLikes] = React.useState({})
-  const [commentBookmarks, setCommentBookmarks] = React.useState({})
+  const [open, setOpen] = useState(false)
+  const [selectedPost, setSelectedPost] = useState(null)
+  const [imageModalOpen, setImageModalOpen] = useState(false)
+  const [commentText, setCommentText] = useState("")
+  const [postLiked, setPostLiked] = useState(false)
+  const [postBookmarked, setPostBookmarked] = useState(false)
+  const [commentLikes, setCommentLikes] = useState({})
+  const [commentBookmarks, setCommentBookmarks] = useState({})
 
   const handleOpen = (post) => {
     setSelectedPost(post)

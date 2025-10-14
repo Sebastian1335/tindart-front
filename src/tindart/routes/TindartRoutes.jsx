@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router"
 import { MainLayout } from "../layout/MainLayout"
 import { Feed } from "../pages/feed/feed"
+import { Whiteboard } from "../pages/whiteboard/Whiteboard"
 
 
 export const TindartRoutes = () => {
@@ -8,6 +9,7 @@ export const TindartRoutes = () => {
     <Routes>
         <Route path='/' element={<MainLayout/>}>
           <Route index element={<Feed/>}/>
+          <Route path='/whiteboard' element={<Whiteboard/>}/>
         </Route>
     </Routes>
   )

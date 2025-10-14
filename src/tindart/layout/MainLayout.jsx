@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import "./MainLayout.css"
-import { Outlet } from "react-router"
+import { Link, Outlet } from "react-router"
 
 const formValues = {
   busqueda: "",
@@ -47,7 +47,9 @@ export const MainLayout = () => {
       {/* Navbar */}
       <nav className="navbar">
         <h2>
+          <Link to={"/feed"}>
           TIND<span>ART</span>
+          </Link>
         </h2>
 
         <div>
@@ -56,7 +58,7 @@ export const MainLayout = () => {
 
         <div className="nav-links">
           <a href="#">+ Publicar arte</a>
-          <a href="#">Whiteboard</a>
+          <Link to={"/feed/whiteboard"}>Whiteboard</Link>
           <a href="#">Tienda</a>
         </div>
       </nav>
