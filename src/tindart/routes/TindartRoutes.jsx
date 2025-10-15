@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router"
 import { MainLayout } from "../layout/MainLayout"
-import { Feed } from "../pages/feed/feed"
+import { Feed } from "../pages/feed/Feed"
 import { Whiteboard } from "../pages/whiteboard/Whiteboard"
 
 

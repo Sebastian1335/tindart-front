@@ -1,6 +1,7 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import "./MainLayout.css"
 import { Link, Outlet } from "react-router"
+import PublishArtModal from "../componentes/PublishArtModal"
 
 const formValues = {
   busqueda: "",
@@ -41,6 +42,15 @@ const mockArtists = [
 export const MainLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [formState, setFormState] = useState(formValues)
+  const [publishModalOpen, setPublishModalOpen] = useState(false)
+
+  const handleOpenPublishModal = () => {
+    setPublishModalOpen(true)
+  }
+
+  const handleClosePublishModal = () => {
+    setPublishModalOpen(false)
+  }
 
   return (
     <div className={`layout ${sidebarOpen ? "expanded" : "collapsed"}`}>
@@ -48,7 +58,7 @@ export const MainLayout = () => {
       <nav className="navbar">
         <h2>
           <Link to={"/feed"}>
-          TIND<span>ART</span>
+            TIND<span>ART</span>
           </Link>
         </h2>
 
@@ -57,12 +67,20 @@ export const MainLayout = () => {
         </div>
 
         <div className="nav-links">
-          <a href="#">+ Publicar arte</a>
+          <a
+            href="#"
+            onClick={(e) => {
+              e.preventDefault()
+              handleOpenPublishModal()
+            }}
+          >
+            + Publicar arte
+          </a>
           <Link to={"/feed/whiteboard"}>Whiteboard</Link>
           <a href="#">Tienda</a>
         </div>
       </nav>
-    <div className="main-content">
+      <div className="main-content">
         {/* Sidebar izquierda */}
         <aside className={`sidebar left ${sidebarOpen ? "open" : "closed"}`}>
           <button className="toggle-btn" onClick={() => setSidebarOpen(!sidebarOpen)}>
@@ -115,13 +133,13 @@ export const MainLayout = () => {
           )}
         </aside>
 
-
         {/* Contenido principal */}
         <main className="page-content">
           <Outlet />
         </main>
       </div>
+
+      <PublishArtModal open={publishModalOpen} onClose={handleClosePublishModal} />
     </div>
   )
-
 }
