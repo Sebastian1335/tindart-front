@@ -20,6 +20,7 @@
   position: sticky;
   top: 0;
   z-index: 100;
+  flex-wrap: wrap;
 }
 
 /* Logo */
@@ -46,6 +47,8 @@
   color: white;
   outline: none;
   transition: all 0.3s ease;
+  flex: 1;
+  margin-right: 1rem;
 }
 
 .navbar input:focus {
@@ -71,7 +74,7 @@
 
 /* Botón principal  */
 .nav-links a:first-child {
-  background: linear-gradient(90deg,  #9a4dff, #ff6cab);
+  background: linear-gradient(90deg, #9a4dff, #ff6cab);
   color: white;
   font-weight: 600;
 }
@@ -205,7 +208,7 @@
   color: #ffffff;
   padding: 0.75rem 1.5rem;
   border-radius: 1.5rem;
-  border-color: #E36B63;
+  border-color: #e36b63;
   font-size: 0.875rem;
   font-weight: 600;
   cursor: pointer;
@@ -219,7 +222,7 @@
 }
 
 .ver-todos-btn:hover {
-  background: linear-gradient(90deg,  #9a4dff, #ff6cab);
+  background: linear-gradient(90deg, #9a4dff, #ff6cab);
   color: #fff;
   border-color: transparent;
 }
@@ -289,7 +292,7 @@
 }
 
 .siguiendo-btn:hover {
-  background: linear-gradient(90deg,  #9a4dff, #ff6cab);
+  background: linear-gradient(90deg, #9a4dff, #ff6cab);
   border: transparent;
   border-radius: 30px;
 }
@@ -338,4 +341,93 @@
 .layout.collapsed .page-content {
   margin-left: 0;
   margin-left: 20px;
+}
+
+
+/* ===== Botones del navbar (la parte derecha) ===== */
+.nav-icons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-icon-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.nav-icon-btn:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+/* Help button con icon y text */
+.help-btn {
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  background: #2a2a30;
+  border-radius: 20px;
+  gap: 0.5rem;
+}
+
+.help-btn:hover {
+  background: #34343a;
+}
+
+/* Notification button with badge (aunque aun no se ocmo va funcionar eso, la yo del futuro lo descubrira v:)*/
+.notification-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  position: relative;
+}
+
+.notification-badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background: #ff4757;
+  color: white;
+  font-size: 0.625rem;
+  font-weight: 700;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #1b1b1f;
+}
+
+/* Settings button */
+.settings-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+/* Profile button */
+.profile-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  padding: 0;
+  overflow: hidden;
+  border: 2px solid transparent;
+  background: linear-gradient(#1b1b1f, #1b1b1f) padding-box, linear-gradient(90deg, #9a4dff, #ff6cab) border-box;
+}
+
+.profile-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 }

@@ -1,4 +1,3 @@
-"use client"
 import { useState } from "react"
 import { Modal, Box, IconButton } from "@mui/material"
 import "./PublishArtModal.css"
