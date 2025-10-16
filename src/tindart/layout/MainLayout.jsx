@@ -1,3 +1,5 @@
+"use client"
+
 import { useState } from "react"
 import "./MainLayout.css"
 import { Link, Outlet } from "react-router"
@@ -46,6 +48,7 @@ export const MainLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [formState, setFormState] = useState(formValues)
   const [publishModalOpen, setPublishModalOpen] = useState(false)
+  const [profilePopoverOpen, setProfilePopoverOpen] = useState(false)
 
   const handleOpenPublishModal = () => {
     setPublishModalOpen(true)
@@ -83,7 +86,6 @@ export const MainLayout = () => {
           <a href="#">Tienda</a>
         </div>
 
-        {/* botones del navbar (config, alerta, ayuda, perfil) */}
         <div className="nav-icons">
           <button className="nav-icon-btn help-btn">
             <ChatBubbleOutlineIcon sx={{ fontSize: 18 }} />
@@ -92,16 +94,52 @@ export const MainLayout = () => {
 
           <button className="nav-icon-btn notification-btn">
             <NotificationsNoneIcon sx={{ fontSize: 20 }} />
-            <span className="notification-badge">0</span>
+            <span className="notification-badge">2</span>
           </button>
 
           <button className="nav-icon-btn settings-btn">
             <SettingsIcon sx={{ fontSize: 20 }} />
           </button>
 
-          <button className="nav-icon-btn profile-btn">
-            <img src="/icono.png" alt="Profile" className="profile-avatar" />
-          </button>
+          <div
+            className="profile-container"
+            onMouseEnter={() => setProfilePopoverOpen(true)}
+            onMouseLeave={() => setProfilePopoverOpen(false)}
+          >
+            <button className="nav-icon-btn profile-btn">
+              <img src="/icono.png" alt="Profile" className="profile-avatar" />
+            </button>
+
+            {profilePopoverOpen && (
+              <div className="profile-popover">
+                <div className="profile-popover-banner">
+                  <img
+                    src="public\fondo perfil.png"
+                    alt="Banner"
+                  />
+                </div>
+                  {/* Aca seria ver como se le haria la logica de followers y demas */}
+                <div className="profile-popover-content">
+                  <h3 className="profile-popover-name">FloppaLoopie</h3>
+                  <p className="profile-popover-handle">@FloppaLive</p>
+                  <div className="profile-popover-stats">
+                    <div className="stat">
+                      <span className="stat-label">Seguidores</span>
+                      <span className="stat-value">8345</span>
+                    </div>
+                    <div className="stat">
+                      <span className="stat-label">Me gusta</span>
+                      <span className="stat-value">8345k</span>
+                    </div>
+                    <div className="stat">
+                      <span className="stat-label">Siguiendo</span>
+                      <span className="stat-value">2345</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </nav>
       <div className="main-content">

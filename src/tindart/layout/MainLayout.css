@@ -92,6 +92,178 @@
   opacity: 0.9;
 }
 
+/* ===== Nav Icons (Right Side) ===== */
+.nav-icons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-icon-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.nav-icon-btn:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+/* Help button con icon y text */
+.help-btn {
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  background: #2a2a30;
+  border-radius: 20px;
+  gap: 0.5rem;
+}
+
+.help-btn:hover {
+  background: #34343a;
+}
+
+/* Notification button con badge */
+.notification-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  position: relative;
+}
+
+.notification-badge {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background: #ff4757;
+  color: white;
+  font-size: 0.625rem;
+  font-weight: 700;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #1b1b1f;
+}
+
+/* Settings button */
+.settings-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+/* Profile button con avatar */
+.profile-container {
+  position: relative;
+}
+
+.profile-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  padding: 0;
+  overflow: hidden;
+  border: 2px solid transparent;
+  background: linear-gradient(#1b1b1f, #1b1b1f) padding-box, linear-gradient(90deg, #9a4dff, #ff6cab) border-box;
+}
+
+.profile-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Added profile popover styles */
+.profile-popover {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 380px;
+  background: #1b1b1f;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.profile-popover-banner {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.profile-popover-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-popover-content {
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.profile-popover-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: white;
+  margin: 0 0 0.25rem 0;
+}
+
+.profile-popover-handle {
+  font-size: 0.875rem;
+  color: #888;
+  margin: 0 0 1.5rem 0;
+}
+
+.profile-popover-stats {
+  display: flex;
+  justify-content: space-around;
+  gap: 1rem;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: #888;
+  font-weight: 500;
+}
+
+.stat-value {
+  font-size: 1.125rem;
+  color: white;
+  font-weight: 700;
+}
+
 /* ===== Contenido principal ===== */
 .main-content {
   display: flex;
@@ -152,6 +324,7 @@
   background: #34343a;
   transform: scale(1.1);
 }
+
 /* scroll gaa */
 .sidebar-content {
   width: 100%;
@@ -341,93 +514,4 @@
 .layout.collapsed .page-content {
   margin-left: 0;
   margin-left: 20px;
-}
-
-
-/* ===== Botones del navbar (la parte derecha) ===== */
-.nav-icons {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.nav-icon-btn {
-  background: transparent;
-  border: none;
-  color: white;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-  position: relative;
-}
-
-.nav-icon-btn:hover {
-  opacity: 0.8;
-  transform: scale(1.05);
-}
-
-/* Help button con icon y text */
-.help-btn {
-  font-size: 0.875rem;
-  font-weight: 500;
-  padding: 0.5rem 1rem;
-  background: #2a2a30;
-  border-radius: 20px;
-  gap: 0.5rem;
-}
-
-.help-btn:hover {
-  background: #34343a;
-}
-
-/* Notification button with badge (aunque aun no se ocmo va funcionar eso, la yo del futuro lo descubrira v:)*/
-.notification-btn {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  position: relative;
-}
-
-.notification-badge {
-  position: absolute;
-  top: 2px;
-  right: 2px;
-  background: #ff4757;
-  color: white;
-  font-size: 0.625rem;
-  font-weight: 700;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid #1b1b1f;
-}
-
-/* Settings button */
-.settings-btn {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-}
-
-/* Profile button */
-.profile-btn {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  padding: 0;
-  overflow: hidden;
-  border: 2px solid transparent;
-  background: linear-gradient(#1b1b1f, #1b1b1f) padding-box, linear-gradient(90deg, #9a4dff, #ff6cab) border-box;
-}
-
-.profile-avatar {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
 }
