@@ -1,5 +1,3 @@
-"use client"
-
 import { useState } from "react"
 import "./MainLayout.css"
 import { Link, Outlet } from "react-router"
@@ -114,7 +112,7 @@ export const MainLayout = () => {
               <div className="profile-popover">
                 <div className="profile-popover-banner">
                   <img
-                    src="public\fondo perfil.png"
+                    src="/fondo perfil.png"
                     alt="Banner"
                   />
                 </div>
@@ -175,11 +173,6 @@ export const MainLayout = () => {
                           <img src={artist.avatar || "/placeholder.svg"} alt={artist.name} className="artist-avatar" />
                           <span className="artist-name">
                             {artist.name}
-                            {artist.verified && (
-                              <svg className="verified-badge" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
-                              </svg>
-                            )}
                           </span>
                         </div>
                         <button className="siguiendo-btn">Siguiendo</button>
