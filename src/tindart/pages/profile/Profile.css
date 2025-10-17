@@ -1,47 +1,60 @@
-.profile-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  background-color: #0a0a0a;
-  color: #ffffff;
-  position: relative;
-}
-
-.profile-main {
-  flex: 1;
-  padding-bottom: 40px;
-}
-
-/* Banner and Avatar */
-.profile-header {
-  margin-bottom: 40px;
-}
-
-.profile-banner {
-  position: relative;
+/* Scoped with .tindart-profile to avoid colliding with MainLayout or Feed */
+.tindart-profile .profile-banner-container {
   width: 100%;
   height: 300px;
   overflow: hidden;
   border-radius: 0;
+  flex-shrink: 0;
 }
 
-.profile-banner img {
+.tindart-profile .profile-banner {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.profile-avatar-wrapper {
-  position: absolute;
-  bottom: -50px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
+.tindart-profile .profile-content-wrapper {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  gap: 0;
 }
 
-.profile-avatar-large {
-  width: 140px;
-  height: 140px;
+.tindart-profile .profile-info-column {
+  width: 280px;
+  padding: 40px 30px;
+  border-right: 1px solid #222222;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex-shrink: 0;
+  background: transparent; 
+}
+
+/* Right column for portfolio */
+.tindart-profile .portfolio-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 20px 30px;
+}
+
+.tindart-profile .profile-avatar-wrapper {
+  position: relative;
+  bottom: auto;
+  left: auto;
+  transform: none;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.tindart-profile .profile-avatar-large {
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   border: 4px solid #d946ef;
   overflow: hidden;
@@ -49,71 +62,93 @@
   padding: 2px;
 }
 
-.profile-avatar-large img {
+.tindart-profile .profile-avatar-large img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 50%;
 }
 
-/* Profile Info Section */
-.profile-info-section {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 80px 40px 30px;
-  gap: 20px;
-}
-
-.profile-info-left {
-  flex: 1;
-}
-
-.profile-username {
-  font-size: 32px;
+.tindart-profile .profile-username {
+  font-size: 24px;
   font-weight: 700;
-  margin: 0 0 5px 0;
+  margin: 0;
   color: #ffffff;
+  text-align: center;
 }
 
-.profile-handle {
-  font-size: 16px;
+.tindart-profile .profile-handle {
+  font-size: 14px;
   color: #888888;
-  margin: 0 0 20px 0;
+  margin: 0;
+  text-align: center;
 }
 
-.profile-stats {
-  display: flex;
-  gap: 40px;
-  margin-top: 20px;
+.tindart-profile .profile-description {
+  font-size: 13px;
+  color: #aaaaaa;
+  margin: 10px 0 0 0;
+  text-align: center;
+  line-height: 1.4;
 }
 
-.stat-item {
+.tindart-profile .profile-stats {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 15px;
+  margin-top: 10px;
+  padding: 20px 0;
+  border-top: 1px solid #222222;
+  border-bottom: 1px solid #222222;
 }
 
-.stat-label {
-  font-size: 14px;
+.tindart-profile .stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.tindart-profile .stat-label {
+  font-size: 13px;
   color: #888888;
   text-transform: capitalize;
 }
 
-.stat-value {
-  font-size: 18px;
+.tindart-profile .stat-value {
+  font-size: 16px;
   font-weight: 600;
   color: #ffffff;
 }
 
-/* Profile Actions */
-.profile-actions {
+.tindart-profile .seguir-btn {
+  padding: 10px 24px;
+  border: 2px solid #d946ef;
+  background-color: transparent;
+  color: #d946ef;
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.tindart-profile .seguir-btn:hover {
+  background-color: #d946ef;
+  color: #ffffff;
+}
+
+.tindart-profile .profile-actions {
   display: flex;
   gap: 12px;
   align-items: center;
+  margin-bottom: 0;
+  flex-shrink: 0;
 }
 
-.editar-perfil-btn {
+.tindart-profile .editar-perfil-btn {
   padding: 10px 24px;
   border: 2px solid #d946ef;
   background-color: transparent;
@@ -125,12 +160,12 @@
   transition: all 0.3s ease;
 }
 
-.editar-perfil-btn:hover {
+.tindart-profile .editar-perfil-btn:hover {
   background-color: #d946ef;
   color: #ffffff;
 }
 
-.icon-btn {
+.tindart-profile .icon-btn {
   width: 40px;
   height: 40px;
   border: none;
@@ -144,20 +179,20 @@
   transition: background-color 0.3s ease;
 }
 
-.icon-btn:hover {
+.tindart-profile .icon-btn:hover {
   background-color: #1a1a1a;
 }
 
 /* Tabs */
-.profile-tabs {
+.tindart-profile .profile-tabs {
   display: flex;
   gap: 40px;
-  padding: 0 40px;
   border-bottom: 1px solid #222222;
-  margin-bottom: 30px;
+  padding-bottom: 0;
+  flex-shrink: 0;
 }
 
-.tab-btn {
+.tindart-profile .tab-btn {
   padding: 15px 0;
   border: none;
   background-color: transparent;
@@ -169,126 +204,68 @@
   transition: color 0.3s ease;
 }
 
-.tab-btn:hover {
+.tindart-profile .tab-btn:hover {
   color: #ffffff;
 }
 
-.tab-btn.active {
+.tindart-profile .tab-btn.active {
   color: #ffffff;
 }
 
-.tab-btn.active::after {
+.tindart-profile .tab-btn.active::after {
   content: "";
   position: absolute;
   bottom: -1px;
   left: 0;
   right: 0;
-  height: 2px;
-  background-color: #d946ef;
+  height: 4px;
+  background-color: #ffffff;
 }
 
-/* Bio Section */
-.profile-bio-section {
-  padding: 0 40px 30px;
-}
-
-.profile-bio {
-  font-size: 14px;
-  color: #aaaaaa;
-  line-height: 1.6;
-  margin: 0 0 20px 0;
-  word-break: break-word;
-}
-
-/* Portfolio Grid */
-.portfolio-section {
-  padding: 0 40px;
-}
-
-.portfolio-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 16px;
-  grid-auto-rows: 200px;
-}
-
-.portfolio-item {
+/* Portfolio grid basics */
+.tindart-profile .portfolio-item {
   position: relative;
   overflow: hidden;
   border-radius: 12px;
   cursor: pointer;
   transition: transform 0.3s ease;
+  aspect-ratio: 1;
 }
 
-.portfolio-item:hover {
-  transform: scale(1.02);
-}
-
-.portfolio-item img {
+.tindart-profile .portfolio-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-/* Floating Messages Button */
-.floating-messages-btn {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
+/* Header row */
+.tindart-profile .profile-header-row {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 8px;
-  padding: 12px 20px;
-  background-color: #1a1a1a;
-  border: 1px solid #333333;
-  color: #ffffff;
-  border-radius: 24px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  z-index: 100;
-}
-
-.floating-messages-btn:hover {
-  background-color: #d946ef;
-  border-color: #d946ef;
-  transform: translateY(-2px);
+  gap: 20px;
+  margin-bottom: 20px;
+  flex-shrink: 0;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .profile-info-section {
+  .tindart-profile .profile-content-wrapper {
     flex-direction: column;
-    padding: 60px 20px 20px;
   }
 
-  .profile-actions {
+  .tindart-profile .profile-info-column {
     width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #222222;
+    padding: 20px;
   }
 
-  .editar-perfil-btn {
-    flex: 1;
+  .tindart-profile .portfolio-column {
+    padding: 20px;
   }
 
-  .profile-tabs {
-    padding: 0 20px;
+  .tindart-profile .profile-tabs {
     gap: 20px;
-  }
-
-  .portfolio-section {
-    padding: 0 20px;
-  }
-
-  .portfolio-grid {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    grid-auto-rows: 150px;
-  }
-
-  .floating-messages-btn {
-    bottom: 20px;
-    right: 20px;
-    padding: 10px 16px;
-    font-size: 12px;
   }
 }
