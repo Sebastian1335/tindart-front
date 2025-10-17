@@ -106,6 +106,7 @@ export const MainLayout = () => {
           >
             <button className="nav-icon-btn profile-btn">
               <img src="/icono.png" alt="Profile" className="profile-avatar" />
+              <Link to={"/feed/Profile"}>Profile</Link>
             </button>
 
             {profilePopoverOpen && (
