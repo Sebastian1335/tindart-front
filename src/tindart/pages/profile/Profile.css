@@ -1,0 +1,294 @@
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: #0a0a0a;
+  color: #ffffff;
+  position: relative;
+}
+
+.profile-main {
+  flex: 1;
+  padding-bottom: 40px;
+}
+
+/* Banner and Avatar */
+.profile-header {
+  margin-bottom: 40px;
+}
+
+.profile-banner {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 0;
+}
+
+.profile-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-avatar-wrapper {
+  position: absolute;
+  bottom: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.profile-avatar-large {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 4px solid #d946ef;
+  overflow: hidden;
+  background: linear-gradient(135deg, #d946ef, #ec4899);
+  padding: 2px;
+}
+
+.profile-avatar-large img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Profile Info Section */
+.profile-info-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 80px 40px 30px;
+  gap: 20px;
+}
+
+.profile-info-left {
+  flex: 1;
+}
+
+.profile-username {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 5px 0;
+  color: #ffffff;
+}
+
+.profile-handle {
+  font-size: 16px;
+  color: #888888;
+  margin: 0 0 20px 0;
+}
+
+.profile-stats {
+  display: flex;
+  gap: 40px;
+  margin-top: 20px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.stat-label {
+  font-size: 14px;
+  color: #888888;
+  text-transform: capitalize;
+}
+
+.stat-value {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* Profile Actions */
+.profile-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.editar-perfil-btn {
+  padding: 10px 24px;
+  border: 2px solid #d946ef;
+  background-color: transparent;
+  color: #d946ef;
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.editar-perfil-btn:hover {
+  background-color: #d946ef;
+  color: #ffffff;
+}
+
+.icon-btn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background-color: transparent;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.icon-btn:hover {
+  background-color: #1a1a1a;
+}
+
+/* Tabs */
+.profile-tabs {
+  display: flex;
+  gap: 40px;
+  padding: 0 40px;
+  border-bottom: 1px solid #222222;
+  margin-bottom: 30px;
+}
+
+.tab-btn {
+  padding: 15px 0;
+  border: none;
+  background-color: transparent;
+  color: #888888;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.tab-btn:hover {
+  color: #ffffff;
+}
+
+.tab-btn.active {
+  color: #ffffff;
+}
+
+.tab-btn.active::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #d946ef;
+}
+
+/* Bio Section */
+.profile-bio-section {
+  padding: 0 40px 30px;
+}
+
+.profile-bio {
+  font-size: 14px;
+  color: #aaaaaa;
+  line-height: 1.6;
+  margin: 0 0 20px 0;
+  word-break: break-word;
+}
+
+/* Portfolio Grid */
+.portfolio-section {
+  padding: 0 40px;
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  grid-auto-rows: 200px;
+}
+
+.portfolio-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.portfolio-item:hover {
+  transform: scale(1.02);
+}
+
+.portfolio-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Floating Messages Button */
+.floating-messages-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background-color: #1a1a1a;
+  border: 1px solid #333333;
+  color: #ffffff;
+  border-radius: 24px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+
+.floating-messages-btn:hover {
+  background-color: #d946ef;
+  border-color: #d946ef;
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .profile-info-section {
+    flex-direction: column;
+    padding: 60px 20px 20px;
+  }
+
+  .profile-actions {
+    width: 100%;
+  }
+
+  .editar-perfil-btn {
+    flex: 1;
+  }
+
+  .profile-tabs {
+    padding: 0 20px;
+    gap: 20px;
+  }
+
+  .portfolio-section {
+    padding: 0 20px;
+  }
+
+  .portfolio-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-auto-rows: 150px;
+  }
+
+  .floating-messages-btn {
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 16px;
+    font-size: 12px;
+  }
+}
