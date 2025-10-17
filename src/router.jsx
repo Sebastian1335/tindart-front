@@ -1,18 +1,32 @@
-import { Navigate, Route, Routes } from "react-router"
-import { Login } from "./Auth/Login/Login"
-import { Register } from "./Auth/Register/Register"
-import { AuthRoutes } from "./Auth/routes/AuthRoutes"
-import { TindartRoutes } from "./tindart/routes/TindartRoutes"
+import { Navigate, Route, Routes } from "react-router";
+import { AuthRoutes } from "./Auth/routes/AuthRoutes";
+import { TindartRoutes } from "./tindart/routes/TindartRoutes";
+import { useAuthStore } from "./Auth/store/authStore";
 
 export const Router = () => {
-  return (
-      <Routes>
-          <Route path="/auth/*" element={<AuthRoutes/>}/>
-          <Route path="/feed/*" element={<TindartRoutes/>}/>
-          <Route path='/' element={<Navigate to={"/auth"}/>}/>
-          <Route path='/*' element={<Navigate to={"/auth"}/>}/>
-      </Routes>
-  )
-}
+    const token = useAuthStore((state) => state.token);
+    const isAuthenticated = Boolean(token);
 
-
+    return (
+        <Routes>
+            {isAuthenticated ? (
+                <>
+                    <Route path="/feed/*" element={<TindartRoutes />} />
+                    <Route
+                        path="/*"
+                        element={<Navigate to="/feed" replace />}
+                    />
+                </>
+            ) : (
+                <>
+                    <Route path="/auth/*" element={<AuthRoutes />} />
+                    <Route
+                        path="/*"
+                        element={<Navigate to="/auth" replace />}
+                    />
+                </>
+            )}
+            <Route path="/*" element={<Navigate to={"/auth"} />} />
+        </Routes>
+    );
+};

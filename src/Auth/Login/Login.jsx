@@ -1,45 +1,32 @@
-import { useState } from "react"
 import styles from "./Login.module.css"
 import { Link } from "react-router"
+import { useAuthStore } from "../store/authStore"
+import { useForm } from "../../hooks/useForm"
 
 const formValues = {
-  usuario: "",
+  email: "",
   password: "",
 }
 
 
 export const Login = () => {
-  const [formState, setFormState] = useState(formValues)
-  const [onLoading, setOnloading] = useState(false)
-  const onInputChange = ({target}) => {
-    const {name, value} = target;
-    setFormState({
-      ...formState,
-      [name]: value
-    })
+  const loginUser = useAuthStore((state) => state.loginUser)
+  const loading = useAuthStore((state) => state.loading)
+  const {form, onInputChange, setForm} = useForm(formValues)
+  const onSubmitForm = (e) => {
+    e.preventDefault()
+    loginUser(form)
   }
-  const esperar = () => {setTimeout(() => {
-      setOnloading(false)
-  }, 1000)};
-
-  const onSubmitForm = () => {
-    event.preventDefault();
-    setOnloading(true)
-    esperar()
-    console.log(formState)
-  }
-
-
   return (
       <div className={styles.LoginPage}>
       <div className={styles.LoginBox}>
         <form>
-          <h1>{onLoading == true ? "Cargando" : "Ingresar"}</h1>
+          <h1>{loading == true ? "Cargando" : "Ingresar"}</h1>
           <h3>Correo Electrónico</h3>
           <input 
             type="text" 
-            placeholder="usuario o correo electrónico"
-            name="usuario"
+            placeholder="correo electrónico"
+            name="email"
             onChange={onInputChange}
           />
           <h3>Contraseña</h3>

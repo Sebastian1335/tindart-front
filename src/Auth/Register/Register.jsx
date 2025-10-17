@@ -1,54 +1,45 @@
 import { useState } from "react"
 import styles from "./Register.module.css"
 import { Link } from "react-router"
+import { useForm } from "../../hooks/useForm"
+import { useAuthStore } from "../store/authStore"
 
 const formValues = {
-  usuario: "",
+  email: "",
+  name: "",
   password: "",
   confirmPassword: ""
 }
 
 
 export const Register = () => {
-  const [formState, setFormState] = useState(formValues)
-  const [onLoading, setOnloading] = useState(false)
-  const onInputChange = ({target}) => {
-    const {name, value} = target;
-    setFormState({
-      ...formState,
-      [name]: value
-    })
+
+  const {form,onInputChange,setForm} = useForm(formValues)
+  const registerUser = useAuthStore((state) => state.registerUser)
+  const loading = useAuthStore((state) => state.loading)
+  const onSubmitForm = (e) => {
+    e.preventDefault()
+    const {confirmPassword, ...body} = form
+    registerUser(body)
   }
-  const esperar = () => {setTimeout(() => {
-      setOnloading(false)
-  }, 1000)};
-
-  const onSubmitForm = () => {
-    event.preventDefault();
-    setOnloading(true)
-    esperar()
-    console.log(formState)
-  }
-
-
   return (
     <>
       <div className={styles.LoginPage}>
       <div className={styles.LoginBox}>
         <form>
-          <h1>{onLoading == true ? "Cargando" : "Registro"}</h1>
+          <h1>{loading == true ? "Cargando" : "Registro"}</h1>
           <h3>Correo Electronico</h3>
           <input 
             type="text" 
             placeholder="Correo electrónico"
-            name="usuario"
+            name="email"
             onChange={onInputChange}
             />
           <h3>Usuario</h3>
           <input 
             type="text" 
             placeholder="Usuario"
-            name="usuario"
+            name="name"
             onChange={onInputChange}
             />
           <h3>Contraseña</h3>
@@ -68,7 +59,7 @@ export const Register = () => {
           <button type="submit" onClick={onSubmitForm}>Registrarse</button>
           <p className={styles.RegisterText}>
             ¿Ya tienes una cuenta?{" "}
-            <Link to={"/auth/login"} className="">
+            <Link to={"/auth"} className="">
               Inicia Sesión
             </Link>
           </p>
