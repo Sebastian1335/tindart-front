@@ -1,77 +1,80 @@
 .LoginPage {
-  min-height: 100vh;
-  min-width: 100vw;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(135deg, #667eea, #764ba2);
   background-image: url("https://wallpapers.com/images/featured/arte-moderno-eua0t4x1os9lp8vr.jpg");
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.LoginPage h1 {
-  color: #FFFFFF;
-  margin-bottom: 20px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.LoginPage h3 {
-  color: #FFFFFF;
-  margin-bottom: 0px;
-  margin-left: 25%;
-  margin-right: auto;
-  font-size: 24;
-  font: "Poppings";
-}
-
-
+/* ----- Caja del formulario ----- */
 .LoginBox {
-  background: #2E2D34;
-  padding: 30px 25px;
-  border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-  width: 48%;
-  height: 100vh;
-  margin-left: 52%;
+  background: rgba(46, 45, 52, 0.95);
+  padding: 40px 30px;
+  border-radius: 20px 0 0 20px;
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.25);
+  width: 50%;
+  margin-left: auto; /* Se mantiene en la mitad derecha */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .LoginBox form {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  width: 100%;
+}
+
+.LoginPage h1 {
+  color: #FFFFFF;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.LoginPage h3 {
+  color: #FFFFFF;
+  font-size: 1rem;
+  margin-left: 15%;
+  margin-bottom: 5px;
 }
 
 .LoginBox input {
   background-color: #1B1B1F;
-  padding: 15px;
+  padding: 12px;
   border: 1px solid #1B1B1F;
   border-radius: 10px;
   font-size: 14px;
   outline: none;
   transition: all 0.3s ease;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
-  
+  width: 70%;
+  margin: 0 auto;
+  color: #fff;
+}
+
+.LoginBox input::placeholder {
+  color: #aaa;
 }
 
 .LoginBox input:focus {
   border-color: #667eea;
-  box-shadow: 0 0 10px rgb(255, 255, 255);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
 }
 
 .LoginBox button {
   padding: 12px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 10%;
+  margin: 20px auto 0 auto;
   border: none;
-  width: 50%;
+  width: 70%;
   border-radius: 10px;
   background: linear-gradient(90deg, #E36B63, #BA45E8);
   color: #fff;
-  font-size: 15px;
+  font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
   transition: background 0.3s ease;
@@ -82,7 +85,92 @@
 }
 
 .RegisterText {
-  margin-top: 10%;
-  margin-left: 25%;
+  margin-top: 8%;
+  text-align: center;
   color: #fff;
+  font-size: 0.9rem;
 }
+
+/* =====================================
+   🧠 Responsividad
+===================================== */
+
+/* Tablets (pantallas medianas) */
+@media (max-width: 992px) {
+  .LoginBox {
+    width: 60%;
+    border-radius: 0;
+  }
+
+  .LoginBox input,
+  .LoginBox button {
+    width: 80%;
+  }
+}
+
+/* Celulares (pantallas pequeñas) */
+@media (max-width: 768px) {
+  .LoginPage {
+    flex-direction: column;
+    background-image: none;
+    background: linear-gradient(180deg, #667eea, #764ba2);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .LoginBox {
+    width: 90%;
+    height: auto;
+    margin: 40px auto;
+    padding: 25px 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+  }
+
+  .LoginBox input,
+  .LoginBox button {
+    width: 90%;
+  }
+
+  .LoginPage h1 {
+    font-size: 1.6rem;
+  }
+
+  .LoginPage h3 {
+    font-size: 0.9rem;
+    margin-left: 10%;
+  }
+
+  .RegisterText {
+    font-size: 0.85rem;
+    margin-top: 5%;
+  }
+}
+
+.RegisterText {
+  margin-top: 30px;
+  text-align: center;
+  color: #ccc;
+  font-size: 0.95rem;
+}
+
+.RegisterText a {
+  color: #E36B63;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.RegisterText a:hover {
+  color: #BA45E8;
+  text-decoration: underline;
+}
+
+/* En móviles, ajustamos tamaño y separación */
+@media (max-width: 768px) {
+  .RegisterText {
+    font-size: 0.9rem;
+    margin-top: 20px;
+  }
+}
+

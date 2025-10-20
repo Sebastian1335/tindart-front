@@ -37,13 +37,13 @@ export const Login = () => {
             onChange={onInputChange}
           />
           <button type="submit" onClick={onSubmitForm}>Iniciar sesión</button>
-        </form>
         <p className={styles.RegisterText}>
           ¿No tienes cuenta?{" "}
           <Link to={"/auth/register"} className={""}>
             Crea una aquí
           </Link>
         </p>
+        </form>
       </div>
     </div>
   )
