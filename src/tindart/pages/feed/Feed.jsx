@@ -7,10 +7,9 @@ import { useEffect } from "react";
 import { useAuthStore } from "../../../Auth/store/authStore";
 
 function srcset(image, size, rows = 1, cols = 1) {
-    if (image?.startsWith("data:")) return { src: image, srcSet: image };
+    if (false) return { src: image, srcSet: image };
 
     return {
-        src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
         srcSet: `${image}?w=${size * cols}&h=${
             size * rows
         }&fit=crop&auto=format&dpr=2 2x`,
