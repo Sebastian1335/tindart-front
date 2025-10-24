@@ -4,9 +4,9 @@ import "./PublishArtModal.css"
 import CloseIcon from "@mui/icons-material/Close"
 import UploadIcon from "@mui/icons-material/Upload"
 import DeleteIcon from "@mui/icons-material/Delete"
-import { useForm } from "../../hooks/useForm"
-import { publishArt } from "../store/feedStore"
-import { useAuthStore } from "../../Auth/store/authStore"
+import { useForm } from "../../../hooks/useForm"
+import { publishArt } from "../../store/feedStore"
+import { useAuthStore } from "../../../Auth/store/authStore"
 
 const initialForm = {
   title: "",
