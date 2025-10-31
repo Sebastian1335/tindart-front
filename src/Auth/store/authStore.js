@@ -47,3 +47,8 @@ export const useAuthStore = create(
         }
     )
 );
+
+
+export const useProfileStore = create((set) => {
+    
+})

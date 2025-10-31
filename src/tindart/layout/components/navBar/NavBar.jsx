@@ -2,6 +2,7 @@ import SettingsIcon from "@mui/icons-material/Settings"
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone"
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline"
 import { Link } from "react-router"
+import { ProfilePopOver } from "../profilePopOver/profilePopOver"
 export const NavBar = ({profilePopoverOpen, setProfilePopoverOpen, handleOpenPublishModal}) => {
   
   return (
@@ -56,33 +57,7 @@ export const NavBar = ({profilePopoverOpen, setProfilePopoverOpen, handleOpenPub
             </button>
 
             {profilePopoverOpen && (
-              <div className="profile-popover">
-                <div className="profile-popover-banner">
-                  <img
-                    src="/fondo perfil.png"
-                    alt="Banner"
-                  />
-                </div>
-                  {/* Aca seria ver como se le haria la logica de followers y demas */}
-                <div className="profile-popover-content">
-                  <h3 className="profile-popover-name">FloppaLoopie</h3>
-                  <p className="profile-popover-handle">@FloppaLive</p>
-                  <div className="profile-popover-stats">
-                    <div className="stat">
-                      <span className="stat-label">Seguidores</span>
-                      <span className="stat-value">8345</span>
-                    </div>
-                    <div className="stat">
-                      <span className="stat-label">Me gusta</span>
-                      <span className="stat-value">8345k</span>
-                    </div>
-                    <div className="stat">
-                      <span className="stat-label">Siguiendo</span>
-                      <span className="stat-value">2345</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <ProfilePopOver/>
             )}
           </div>
         </div>

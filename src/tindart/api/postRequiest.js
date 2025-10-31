@@ -32,3 +32,43 @@ export const uploadComment = async (formData, token, postId) => {
     return json
 }
 
+export const fetchToggleLike = async (token, postId) => {
+    const response = await fetch(`${url}/interaction/like/post/${postId}`, {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        },
+    })
+    const json = await response.json()
+    return json
+}
+export const fetchToggleSave = async (token, postId) => {
+    const response = await fetch(`${url}/interaction/save/post/${postId}`, {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        },
+    })
+    const json = await response.json()
+    return json
+}
+export const fetchToggleShare = async (token, postId) => {
+    const response = await fetch(`${url}/interaction/share/post/${postId}`, {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        },
+    })
+    const json = await response.json()
+    return json
+}
+export const fetchToggleLikeComment = async (token, commentId) => {
+    const response = await fetch(`${url}/interaction/like/comment/${commentId}`, {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        },
+    })
+    const json = await response.json()
+    return json
+}

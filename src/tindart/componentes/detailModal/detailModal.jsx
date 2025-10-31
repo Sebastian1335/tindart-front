@@ -11,26 +11,34 @@ import { Comment } from "../coments/Comment";
 import { useEffect } from "react";
 import { useAuthStore } from "../../../Auth/store/authStore";
 import { useForm } from "../../../hooks/useForm";
+import { fetchToggleLike, fetchToggleSave, fetchToggleShare } from "../../api/postrequiest";
 
 const initialValues = {
     content: ""
 }
 
 export const DetailModal = () => {
+    const {form, onInputChange, setForm} = useForm(initialValues);
+
+
     const diselectPost = useFeed((state) => state.diselectPost);
     const image = useFeed((state) => state.image);
     const seeImage = useFeed((state) => state.seeImage);
     const selectedPost = useFeed((state) => state.selectedPost);
     const selectPost = useFeed((state) => state.selectPost);
     const postDetails =  useFeed((state) => state.postDetails)
+    const toggleLike = useFeed((state) => state.toggleLike)
+    const toggleSave = useFeed((state) => state.toggleSave)
+    const toggleShare = useFeed((state) => state.toggleShare)
+
     const token = useAuthStore((state) => state.token)
-    const {form, onInputChange, setForm} = useForm(initialValues)
     const publishComment = postComment((state) => (state.publishComment))
     const pushComment = useFeed((state) => state.pushComment)
+    
+
 
     useEffect(() => {
         postDetails(token , selectedPost.id)
-        
     }, [])
     
     const onClickComment = (e) => {
@@ -96,20 +104,39 @@ export const DetailModal = () => {
                                 <div className="post-actions">
                                     <button
                                         className={`action-button ${
-                                            null ? "active" : ""
+                                            selectedPost?.postDetails?.likedByUser ? "active" : ""
                                         }`}
+                                        onClick={() => {
+                                            fetchToggleLike(token, selectedPost.id)
+                                            toggleLike()
+                                        }}
                                     >
                                         <FavoriteIcon />
+                                        <span>{selectedPost?.postDetails?.count?.LikePost}</span>
                                     </button>
-                                    <button className="action-button">
+                                    <button 
+                                        className={`action-button ${
+                                            selectedPost?.postDetails?.sharedByUser ? "active" : ""
+                                        }`}
+                                        onClick={() => {
+                                            fetchToggleShare(token, selectedPost.id)
+                                            toggleShare()
+                                        }}
+                                    >
                                         <RepeatIcon />
+                                        <span>{selectedPost?.postDetails?.count?.SharePost}</span>
                                     </button>
                                     <button
                                         className={`action-button ${
-                                            null ? "active" : ""
+                                            selectedPost?.postDetails?.savedByUser ? "active" : ""
                                         }`}
+                                        onClick={() => {
+                                            fetchToggleSave(token, selectedPost.id)
+                                            toggleSave()
+                                        }}
                                     >
                                         <BookmarkIcon />
+                                        <span>{selectedPost?.postDetails?.count?.SavePost}</span>
                                     </button>
                                     <button className="action-button">
                                         <ShareIcon />
@@ -141,7 +168,7 @@ export const DetailModal = () => {
                             <div className="comments-list">
                                 {selectedPost?.comments?.map(
                                     (comment, index) => (
-                                        <Comment comment={comment} index={index} key={index}/>
+                                        <Comment comment={comment} index={index} key={index} token={token}/>
                                     )
                                 )}
                             </div>

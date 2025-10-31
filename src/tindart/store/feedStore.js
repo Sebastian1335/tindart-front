@@ -15,72 +15,158 @@ export const useFeed = create((set) => ({
             selectedPost: null,
         })),
     seeImage: () => set((state) => ({ image: !state.image })),
-    loading: false, 
+    loading: false,
     error: null,
-    fetchFeed: async (token ,page, limit) => {
-        set({loading: true, error: null});
+    fetchFeed: async (token, page, limit) => {
+        set({ loading: true, error: null });
         try {
-            const res = await getFeed(token, page, limit)
+            const res = await getFeed(token, page, limit);
             if (!res.error) {
-                set({feed: res.data})
+                set({ feed: res.data });
             } else {
-                set({error: res.error})   
-                console.log(res.error)
+                set({ error: res.error });
+                console.log(res.error);
             }
         } catch (error) {
             set({ error: error.message });
-            console.log(error)
+            console.log(error);
         } finally {
-            set({loading: false})
+            set({ loading: false });
         }
     },
     postDetails: async (token, postId) => {
-        set({loading: true, error: null});
+        set({ loading: true, error: null });
         try {
-            const res = await getPostDetais(token, postId)
+            const res = await getPostDetais(token, postId);
             if (!res.error) {
-                set((state) => ({selectedPost: {...state.selectedPost, ...res}}))
+                set((state) => ({
+                    selectedPost: { ...state.selectedPost, ...res },
+                }));
             } else {
-                set({error: res.error})
+                set({ error: res.error });
             }
         } catch (error) {
             set({ error: error.message });
         } finally {
-            set({loading: false})
+            set({ loading: false });
         }
     },
-    pushComment: (com) => set((state) => {
-        const updated = {
-            ...state.selectedPost,
-            comments: [{content: com},...(state.selectedPost?.comments ?? [])]
-        }
-        return {selectedPost: updated}
-        // Esto obliga a Zustand a actualizar también si depende de selectedPost directamente
-        // selectedPostVersion: Date.now()
-    })
+    pushComment: (com) =>
+        set((state) => {
+            const updated = {
+                ...state.selectedPost,
+                comments: [
+                    { content: com },
+                    ...(state.selectedPost?.comments ?? []),
+                ],
+            };
+            return { selectedPost: updated };
+            // Esto obliga a Zustand a actualizar también si depende de selectedPost directamente
+            // selectedPostVersion: Date.now()
+        }),
+    toggleLike: () =>
+        set((state) => {
+            if (!state.selectedPost) return {};
+            const nextState = !state.selectedPost.postDetails.likedByUser
+            const count = state.selectedPost.postDetails.count.LikePost
+            const updated = {
+                ...state.selectedPost,
+                postDetails: {
+                    ...state.selectedPost.postDetails,
+                    likedByUser: nextState,
+                    count: {
+                        ...state.selectedPost.postDetails.count,
+                        LikePost: nextState ? count + 1 : count - 1
+                    }
+                },
+            };
+            return { selectedPost: updated };
+        }),
+    toggleLikeComment: (index) =>
+        set((state) => {
+            
+            if (!state.selectedPost) return {};
+            const updatedComments = state.selectedPost.comments.map((comment, i) => {
+                if (i === index){
+                    const nextLiked = !comment.liked;
+                    console.log(comment)
+                    return {
+                        ...comment,
+                        liked: nextLiked,
+                        countlikes: comment.countlikes + (nextLiked ? 1 : -1),
+                    }
+                }
+                return comment;
+            })
 
+            return {
+                selectedPost: {
+                    ...state.selectedPost,
+                    comments: updatedComments
+                }
+            }
+        }),
+
+    toggleSave: () =>
+        set((state) => {
+            if (!state.selectedPost) return {};
+            const nextState = !state.selectedPost.postDetails.savedByUser
+            const count = state.selectedPost.postDetails.count.SavePost
+            const updated = {
+                ...state.selectedPost,
+                postDetails: {
+                    ...state.selectedPost.postDetails,
+                    savedByUser: !state.selectedPost.postDetails.savedByUser,
+                    count: {
+                        ...state.selectedPost.postDetails.count,
+                        SavePost: nextState ? count + 1 : count - 1
+                    }
+                },
+            };
+            return { selectedPost: updated };
+        }),
+
+    toggleShare: () =>
+        set((state) => {
+            if (!state.selectedPost) return {};
+            const nextState = !state.selectedPost.postDetails.sharedByUser
+            const count = state.selectedPost.postDetails.count.SharePost
+            const updated = {
+                ...state.selectedPost,
+                postDetails: {
+                    ...state.selectedPost.postDetails,
+                    sharedByUser: !state.selectedPost.postDetails.sharedByUser,
+                    count: {
+                        ...state.selectedPost.postDetails.count,
+                        SharePost: nextState ? count + 1 : count - 1
+                    }
+                },
+            };
+            return { selectedPost: updated };
+        }),
 }));
 
 export const publishArt = create((set) => ({
     publish: null,
     loading: false,
     error: null,
-    setPublish: (formValue) => set(() => ({
-        publish: formValue,
-    })),
+    setPublish: (formValue) =>
+        set(() => ({
+            publish: formValue,
+        })),
     publishPost: async (formData, token) => {
-        set({loading: true, error: null});
+        set({ loading: true, error: null });
         try {
-            const res = await uploadPost(formData, token)
-            if (!res.error){
-                set({publish: res})
+            const res = await uploadPost(formData, token);
+            if (!res.error) {
+                set({ publish: res });
             } else {
-                set({error: res.error})
+                set({ error: res.error });
             }
         } catch (error) {
             set({ error: error.message });
         } finally {
-            set({loading: false})
+            set({ loading: false });
         }
     },
 }));
@@ -89,22 +175,23 @@ export const postComment = create((set) => ({
     comment: null,
     loading: false,
     error: null,
-    setComment: (formValue) => set(() => ({
-        comment: formValue,
-    })),
+    setComment: (formValue) =>
+        set(() => ({
+            comment: formValue,
+        })),
     publishComment: async (formData, token, postId) => {
-        set({loading: true, error: null});
+        set({ loading: true, error: null });
         try {
-            const res = await uploadComment(formData, token, postId)
-            if (!res.error){
-                set({comment: res})
+            const res = await uploadComment(formData, token, postId);
+            if (!res.error) {
+                set({ comment: res });
             } else {
-                set({error: res.error})
+                set({ error: res.error });
             }
         } catch (error) {
             set({ error: error.message });
         } finally {
-            set({loading: false})
+            set({ loading: false });
         }
     },
 }));

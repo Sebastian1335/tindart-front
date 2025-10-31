@@ -24,7 +24,6 @@ export const Feed = () => {
     const token = useAuthStore((state) => state.token);
     useEffect(() => {
         fetchFeed(token, 1, 20);
-        console.log(feed);
     }, []);
 
     return (

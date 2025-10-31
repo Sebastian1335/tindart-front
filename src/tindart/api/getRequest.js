@@ -10,7 +10,6 @@ export const getFeed = async (token, page, limit) => {
     })
 
     const json = await response.json()
-    console.log(json)
     return json
 }
 

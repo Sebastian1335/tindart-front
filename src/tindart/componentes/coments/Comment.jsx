@@ -1,11 +1,9 @@
-import React from "react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import RepeatIcon from "@mui/icons-material/Repeat";
-import BookmarkIcon from "@mui/icons-material/Bookmark";
-import ShareIcon from "@mui/icons-material/Share";
+import { fetchToggleLikeComment } from "../../api/postrequiest";
+import { useFeed } from "../../store/feedStore";
 
-
-export const Comment = ({comment, index}) => {
+export const Comment = ({ comment, index, token }) => {
+    const toggleLikeComment = useFeed((state) => state.toggleLikeComment)
     return (
         <div key={index} className="comment-card">
             <div className="comment-header">
@@ -19,22 +17,16 @@ export const Comment = ({comment, index}) => {
             <p className="comment-text">{comment.content}</p>
             <div className="comment-actions">
                 <button
-                    className={`comment-action-button ${null ? "active" : ""}`}
-                    // onClick={() => handleCommentLike(index)}
+                    className={`comment-action-button ${
+                        comment.liked ? "active" : ""
+                    }`}
+                    onClick={() => {
+                        fetchToggleLikeComment(token, comment.id);
+                        toggleLikeComment(index);
+                    }}
                 >
                     <FavoriteIcon />
-                </button>
-                <button className="comment-action-button">
-                    <RepeatIcon />
-                </button>
-                <button
-                    className={`comment-action-button ${null ? "active" : ""}`}
-                    // onClick={() => handleCommentBookmark(index)}
-                >
-                    <BookmarkIcon />
-                </button>
-                <button className="comment-action-button">
-                    <ShareIcon />
+                    <span>{comment.countlikes}</span>
                 </button>
             </div>
         </div>
