@@ -8,11 +8,11 @@ export const Comment = ({ comment, index, token }) => {
         <div key={index} className="comment-card">
             <div className="comment-header">
                 <img
-                    src={comment.avatar || "/placeholder.svg"}
-                    alt={comment.username}
+                    src={ "/placeholder.svg"}
+                    alt={comment.authorName}
                     className="comment-avatar"
                 />
-                <span className="comment-username">{comment.username}</span>
+                <span className="comment-username">{comment.authorName}</span>
             </div>
             <p className="comment-text">{comment.content}</p>
             <div className="comment-actions">

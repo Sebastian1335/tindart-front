@@ -41,14 +41,14 @@ export const DetailModal = () => {
         postDetails(token , selectedPost.id)
     }, [])
     
-    const onClickComment = (e) => {
+    const onClickComment = async (e) => {
         e.preventDefault();
         const data = new FormData()
         Object.entries(form).forEach(([key, value]) => {
             data.append(key, value)
         })
-        publishComment(data, token, selectedPost.id)
-        pushComment(form.content)
+        const res = await publishComment(data, token, selectedPost.id)
+        pushComment(res)
         setForm(initialValues)
     }
 

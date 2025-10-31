@@ -28,7 +28,7 @@ export const uploadComment = async (formData, token, postId) => {
     })
 
     const json = await response.json()
-
+    console.log(json)
     return json
 }
 

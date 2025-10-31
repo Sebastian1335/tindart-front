@@ -51,19 +51,14 @@ export const useFeed = create((set) => ({
             set({ loading: false });
         }
     },
-    pushComment: (com) =>
-        set((state) => {
-            const updated = {
-                ...state.selectedPost,
-                comments: [
-                    { content: com },
-                    ...(state.selectedPost?.comments ?? []),
-                ],
-            };
-            return { selectedPost: updated };
-            // Esto obliga a Zustand a actualizar también si depende de selectedPost directamente
-            // selectedPostVersion: Date.now()
-        }),
+    pushComment: (commentObj) =>
+        set((state) => ({
+            selectedPost: {
+            ...state.selectedPost,
+            comments: [commentObj, ...(state.selectedPost?.comments ?? [])],
+            },
+        })),
+
     toggleLike: () =>
         set((state) => {
             if (!state.selectedPost) return {};
@@ -89,7 +84,6 @@ export const useFeed = create((set) => ({
             const updatedComments = state.selectedPost.comments.map((comment, i) => {
                 if (i === index){
                     const nextLiked = !comment.liked;
-                    console.log(comment)
                     return {
                         ...comment,
                         liked: nextLiked,
@@ -185,6 +179,7 @@ export const postComment = create((set) => ({
             const res = await uploadComment(formData, token, postId);
             if (!res.error) {
                 set({ comment: res });
+                return res
             } else {
                 set({ error: res.error });
             }
