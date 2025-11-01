@@ -54,7 +54,7 @@
 .whiteboard-title {
   position: absolute;
   top: 0px;
-  left: 50%;
+  left: 20%;
   transform: translateX(-50%);
   font-size: 1.2rem;
   font-weight: 600;

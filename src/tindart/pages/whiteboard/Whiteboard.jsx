@@ -1,51 +1,79 @@
-import { Tldraw } from 'tldraw'
-import 'tldraw/tldraw.css'
-import './Whiteboard.css'
-import { useWhiteboardStore } from '../../store/whiteBoardStore';
-import { useEffect, useRef } from 'react';
+import { Excalidraw } from "@excalidraw/excalidraw";
+import "@excalidraw/excalidraw/index.css";
+import "./Whiteboard.css";
+import { useWhiteboardStore } from "../../store/whiteBoardStore";
+import { useEffect, useRef } from "react";
 
 export const Whiteboard = () => {
-  const { saveWhiteBoard, selectedWhiteBoard, getSnapshot } = useWhiteboardStore()
-  const editorRef = useRef(null)
-  const handleMount = (editor) => {
-    editorRef.current = editor
-    getSnapshot(selectedWhiteBoard.id)
-  }
+  const { saveWhiteBoard, selectedWhiteBoard, getSnapshot } = useWhiteboardStore();
+  const excalidrawApiRef = useRef(null);
+
   useEffect(() => {
-    const editor = editorRef.current
-    console.log(selectedWhiteBoard)
-    if (editor && !!selectedWhiteBoard?.snapshot.schema){
+    if (selectedWhiteBoard?.id) {
+      getSnapshot(selectedWhiteBoard.id);
+    }
+  }, [selectedWhiteBoard?.id]);
+
+  useEffect(() => {
+    if (
+      selectedWhiteBoard?.snapshot &&
+      excalidrawApiRef.current
+    ) {
       try {
-        editor.store.loadStoreSnapshot(selectedWhiteBoard.snapshot)
+        const data = selectedWhiteBoard.snapshot;
+
+        const safeAppState = {
+          ...data.appState,
+          collaborators: new Map(),
+        };
+
+        const normalizedData = {
+          elements: data.elements || [],
+          appState: safeAppState,
+          files: data.files || {},
+        };
+
+        excalidrawApiRef.current.updateScene(normalizedData);
+        console.log("✅ Snapshot cargado exitosamente");
       } catch (error) {
-        console.error('❌ Error al cargar snapshot:', error)
+        console.error("❌ Error al cargar snapshot:", error);
       }
     }
-  }, [selectedWhiteBoard?.snapshot])
+  }, [selectedWhiteBoard?.snapshot]);
 
   const handleSave = async () => {
-    const editor = editorRef.current
-    if (!editor) return
+    const api = excalidrawApiRef.current;
+    if (!api) {
+      console.warn("❗ API de Excalidraw no está lista aún.");
+      return;
+    }
 
-    const snapshot = editor.store.getStoreSnapshot()
-    await saveWhiteBoard({...selectedWhiteBoard, snapshot})
-    alert('Whiteboard guardado ✅')
-  }
+    const elements = api.getSceneElements();
+    const appState = api.getAppState();
+    const files = api.getFiles();
 
+    const cleanAppState = { ...appState, collaborators: {} };
+
+    const snapshot = { elements, appState: cleanAppState, files };
+    await saveWhiteBoard({ ...selectedWhiteBoard, snapshot });
+    alert("Whiteboard guardado ✅");
+  };
 
   return (
     <div className="whiteboard-container">
-      <h1 className="watermark">Made with TLDRAW</h1>
-      <h1 className="whiteboard-title">{selectedWhiteBoard.title}</h1>
-      
+      <h1 className="watermark">Made with Excalidraw</h1>
+      <h1 className="whiteboard-title">{selectedWhiteBoard?.title || "Sin título"}</h1>
+
       <div className="tldraw-wrapper">
-        <Tldraw 
-          onMount={handleMount}
+        <Excalidraw
+          theme="light"
+          excalidrawAPI={(api) => (excalidrawApiRef.current = api)}
         />
       </div>
+
       <button className="save-button" onClick={handleSave}>
         💾 Guardar
       </button>
     </div>
-  )
-}
+  );
+};
