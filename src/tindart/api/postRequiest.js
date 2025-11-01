@@ -72,3 +72,17 @@ export const fetchToggleLikeComment = async (token, commentId) => {
     const json = await response.json()
     return json
 }
+
+export const createWhiteboard = async (token, whiteboard) => {
+    const response = await fetch(`${url}/whiteboard`, {
+        method: "POST",
+        body: JSON.stringify(whiteboard),
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json", 
+        },
+    })
+
+    const json = await response.json()
+    return json
+}

@@ -154,6 +154,8 @@ export const publishArt = create((set) => ({
             const res = await uploadPost(formData, token);
             if (!res.error) {
                 set({ publish: res });
+                const {fetchFeed} = useFeed.getState();
+                await fetchFeed(token,1, 20)
             } else {
                 set({ error: res.error });
             }

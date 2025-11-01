@@ -1,0 +1,135 @@
+/* ───────────── Page ───────────── */
+.whiteboard-page {
+  flex: 1;
+  padding: 40px 60px;
+  background-color: #1b1b1f;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  min-height: 100vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  border-radius: 20px;
+}
+
+/* ───────────── Header ───────────── */
+.whiteboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 95%;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.whiteboard-header h2 {
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.create-btn {
+  background: linear-gradient(90deg, #ff5f6d, #d63aff);
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(214, 58, 255, 0.3);
+}
+
+.create-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(214, 58, 255, 0.5);
+}
+
+/* ───────────── Grid ───────────── */
+.whiteboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 50px;
+  width: 100%;
+  max-width: 95%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ───────────── Card ───────────── */
+.whiteboard-card {
+  background: #222228;
+  border-radius: 16px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 1px solid transparent;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.whiteboard-card:hover {
+  border: 1px solid #541b63;
+  transform: translateY(-4px);
+  box-shadow: 0 0 20px rgba(214, 58, 255, 0.25);
+}
+
+.whiteboard-thumbnail {
+  width: 100%;
+  height: 160px;
+  background: linear-gradient(135deg, #2a2a30, #1e1e22);
+  border-radius: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.05);
+}
+
+.whiteboard-name {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #e2e2e2;
+  margin-bottom: 0;
+}
+.whiteboard-desc {
+  font-size: 0.8rem;
+  /* font-weight: ; */
+  align-self: flex-start;
+  color: #e2e2e2;
+  margin-bottom: 0;
+}
+
+/* ───────────── MUI Overrides ───────────── */
+.MuiDialog-paper {
+  background-color: #242429 !important;
+  color: #fff !important;
+  border-radius: 16px !important;
+}
+
+.MuiInputBase-input {
+  color: #fff !important;
+}
+
+.MuiInputLabel-root {
+  color: #aaa !important;
+}
+
+.MuiOutlinedInput-root fieldset {
+  border-color: #555 !important;
+}
+
+.MuiOutlinedInput-root:hover fieldset {
+  border-color: #d63aff !important;
+}
+
+.MuiButton-containedPrimary {
+  background: linear-gradient(90deg, #ff5f6d, #d63aff) !important;
+  color: white !important;
+  font-weight: 600 !important;
+}
+
+.MuiButton-containedPrimary:hover {
+  box-shadow: 0 0 15px rgba(214, 58, 255, 0.5) !important;
+}

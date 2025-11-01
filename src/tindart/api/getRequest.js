@@ -25,3 +25,25 @@ export const getPostDetais = async (token, postId) => {
 
     return json
 }
+
+export const getWhiteboards = async (token) => {
+    const response = await fetch(`${url}/whiteboard`, {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        },
+    })
+    const json = await response.json()
+    return json
+}
+
+export const getSnapshot = async (token, id) => {
+    const response = await fetch(`${url}/whiteboard/${id}/snapshot`, {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        },
+    })
+    const json = await response.json()
+    return json
+}

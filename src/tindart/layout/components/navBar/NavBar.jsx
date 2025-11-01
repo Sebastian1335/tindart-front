@@ -3,8 +3,10 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone"
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline"
 import { Link } from "react-router"
 import { ProfilePopOver } from "../profilePopOver/profilePopOver"
+import { useState } from "react"
+import { SettingsPopOver } from "../settingsPopOver/SettingsPopOver"
 export const NavBar = ({profilePopoverOpen, setProfilePopoverOpen, handleOpenPublishModal}) => {
-  
+  const [settingsOpen, setSettingsOpen] = useState(false)
   return (
     <nav className="navbar">
         <h2>
@@ -27,7 +29,7 @@ export const NavBar = ({profilePopoverOpen, setProfilePopoverOpen, handleOpenPub
           >
             + Publicar arte
           </a>
-          <Link to={"/feed/whiteboard"}>Whiteboard</Link>
+          <Link to={"/feed/whiteboardList"}>Whiteboard</Link>
           <a href="#">Tienda</a>
         </div>
 
@@ -42,9 +44,13 @@ export const NavBar = ({profilePopoverOpen, setProfilePopoverOpen, handleOpenPub
             <span className="notification-badge">2</span>
           </button>
 
-          <button className="nav-icon-btn settings-btn">
+          <button 
+            className="nav-icon-btn settings-btn"
+            onClick={() => setSettingsOpen(!settingsOpen)}
+          >
             <SettingsIcon sx={{ fontSize: 20 }} />
           </button>
+          {settingsOpen && <SettingsPopOver/>}
 
           <div
             className="profile-container"

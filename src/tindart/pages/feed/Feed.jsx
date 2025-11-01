@@ -7,13 +7,13 @@ import { useEffect } from "react";
 import { useAuthStore } from "../../../Auth/store/authStore";
 
 function srcset(image, size, rows = 1, cols = 1) {
-    if (false) return { src: image, srcSet: image };
-
     return {
-        srcSet: `${image}?w=${size * cols}&h=${
-            size * rows
-        }&fit=crop&auto=format&dpr=2 2x`,
-    };
+    src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
+    srcSet: `${image}?w=${size * cols}&h=${
+      size * rows
+    }&fit=crop&auto=format&dpr=2 2x`,
+  };
+
 }
 
 export const Feed = () => {
@@ -37,14 +37,13 @@ export const Feed = () => {
                     scrollbarWidth: "none",
                     "&::-webkit-scrollbar": { display: "none" },
                 }}
-                variant="quilted"
-                cols={3}
+                cols={4}
                 rowHeight={200}
             >
                 {feed.map((item, index) => {
                     // crea variedad de tamaños visuales
-                    const rows = index % 3 === 0 ? 2 : 1;
-                    const cols = index % 4 === 0 ? 2 : 1;
+                    const rows = 2
+                    const cols = 1
 
                     return (
                         <ImageListItem
