@@ -1,7 +1,6 @@
-const mockWhiteboards = [
-  { id: 1, name: "La hamburgueseria" },
-  { id: 2, name: "La hamburgueseria" },
-]
+import { useEffect } from "react"
+import { useWhiteboardStore } from "../../../store/whiteBoardStore"
+import { useNavigate } from "react-router"
 
 const mockArtists = [
   {
@@ -32,6 +31,24 @@ const mockArtists = [
 
 
 export const SideBar = ({sidebarOpen, setSidebarOpen}) => {
+
+  const fetchWhiteBoardList = useWhiteboardStore((state) => state.fetchWhiteBoardList)
+  const whiteboardList = useWhiteboardStore((state) => state.whiteboardList)
+  const selectWhiteBoard = useWhiteboardStore((state) => state.selectWhiteBoard)
+  const navigate = useNavigate()
+  useEffect(() => {
+    fetchWhiteBoardList()
+  }, [sidebarOpen])
+  
+  const handleVerTodos = () => {
+    navigate("/feed/whiteboardList")
+  }
+
+  const handleWhiteboard = (board) => {
+    selectWhiteBoard(board)
+    navigate("/feed/whiteboard")
+  }
+
   return (
     <aside className={`sidebar left ${sidebarOpen ? "open" : "closed"}`}>
           <button className="toggle-btn" onClick={() => setSidebarOpen(!sidebarOpen)}>
@@ -44,13 +61,13 @@ export const SideBar = ({sidebarOpen, setSidebarOpen}) => {
               <section className="sidebar-section">
                 <h3 className="section-title">Mis Whiteboard</h3>
                 <ul className="whiteboard-list">
-                  {mockWhiteboards.map((board) => (
-                    <li key={board.id} className="whiteboard-item">
-                      {board.name}
+                  {whiteboardList.filter((c, i) => i < 3).map((board) => (
+                    <li key={board.id} className="whiteboard-item" onClick={() => handleWhiteboard(board)}>
+                      {board.title}
                     </li>
                   ))}
                 </ul>
-                <button className="ver-todos-btn">Ver Todos</button>
+                <button className="ver-todos-btn" onClick={handleVerTodos}>Ver Todos</button>
               </section>
 
               {/* Artistas Section */}

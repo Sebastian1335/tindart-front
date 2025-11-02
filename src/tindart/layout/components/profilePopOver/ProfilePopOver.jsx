@@ -16,16 +16,16 @@ export const ProfilePopOver = () => {
                 <div className="profile-popover-stats">
                     <div className="stat">
                         <span className="stat-label">Seguidores</span>
-                        <span className="stat-value">8345</span>
+                        <span className="stat-value">{user.extra.followers}</span>
                     </div>
                     <div className="stat">
                         {/* Imposible que salga esto por el momento */}
                         <span className="stat-label">Me gusta</span>
-                        <span className="stat-value">8345k</span>
+                        <span className="stat-value">{user.extra.LikePost}</span>
                     </div>
                     <div className="stat">
                         <span className="stat-label">Siguiendo</span>
-                        <span className="stat-value">2345</span>
+                        <span className="stat-value">{user.extra.following}</span>
                     </div>
                 </div>
             </div>
