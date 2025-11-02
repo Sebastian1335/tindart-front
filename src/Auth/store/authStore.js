@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { login, register } from "../api/authApi";
+import { getProfileData } from "../../tindart/api/getRequest";
 
 export const useAuthStore = create(
     persist(
@@ -14,7 +15,7 @@ export const useAuthStore = create(
                 try {
                     const res = await register(JSON.stringify(body));
                     if (!res.error) {
-                        set({ user: res.user, token: res.token});
+                        set({ user: res.user, token: res.token });
                     } else {
                         set({ error: res.error || "Error al registrarse" });
                     }
@@ -48,7 +49,17 @@ export const useAuthStore = create(
     )
 );
 
-
-export const useProfileStore = create((set) => {
-    
-})
+export const useProfileStore = create((set) => ({
+    userProfileData: null,
+    loading: false,
+    fetchProfileData: async (id) => {
+        const { token } = useAuthStore.getState();
+        set({ loading: true });
+        try {
+            const data = await getProfileData(id, token);
+            set({ userProfileData: data });
+        } finally {
+            set({ loading: false });
+        }
+    },
+}));

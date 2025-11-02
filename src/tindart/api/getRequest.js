@@ -48,3 +48,14 @@ export const getSnapshot = async (token, id) => {
     const json = await response.json()
     return json
 }
+
+export const getProfileData = async (id, token) => {
+    const request = await fetch(`${url}/profile/profileData/${id}`, {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        },
+    })
+    const response = await request.json() 
+    return response
+}

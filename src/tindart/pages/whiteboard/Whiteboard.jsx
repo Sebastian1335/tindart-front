@@ -34,7 +34,6 @@ export const Whiteboard = () => {
         };
 
         excalidrawApiRef.current.updateScene(normalizedData);
-        console.log("✅ Snapshot cargado exitosamente");
       } catch (error) {
         console.error("❌ Error al cargar snapshot:", error);
       }

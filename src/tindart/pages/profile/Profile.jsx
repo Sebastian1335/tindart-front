@@ -3,54 +3,9 @@ import { ImageList, ImageListItem } from "@mui/material";
 import "./Profile.css";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
-import { useAuthStore } from "../../../Auth/store/authStore";
+import { useAuthStore, useProfileStore } from "../../../Auth/store/authStore";
 import { useFeed } from "../../store/feedStore";
 import { DetailModal } from "../../componentes/detailModal/detailModal";
-
-const portfolioItems = [
-    {
-        id: 1,
-        img: "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?auto=format&fit=crop&q=80&w=1019",
-        title: "Water Lilies",
-        cols: 2,
-        rows: 2,
-    },
-    {
-        id: 2,
-        img: "https://images.unsplash.com/photo-1579783902915-f0b0de2c2eb3?auto=format&fit=crop&q=80&w=1035",
-        title: "Abstract Purple",
-        cols: 1,
-        rows: 1,
-    },
-    {
-        id: 3,
-        img: "https://images.unsplash.com/photo-1579783928621-7a13d66a62d1?auto=format&fit=crop&q=80&w=690",
-        title: "Colorful Art",
-        cols: 1,
-        rows: 1,
-    },
-    {
-        id: 4,
-        img: "https://images.unsplash.com/photo-1533158388470-9a56699990c6?auto=format&fit=crop&q=80&w=755",
-        title: "Blue Waves",
-        cols: 2,
-        rows: 1,
-    },
-    {
-        id: 5,
-        img: "https://images.unsplash.com/photo-1580136579585-48a5311ee2f7?auto=format&fit=crop&q=80&w=1104",
-        title: "Purple Dreams",
-        cols: 2,
-        rows: 2,
-    },
-    {
-        id: 6,
-        img: "https://images.unsplash.com/photo-1533158388470-9a56699990c6?auto=format&fit=crop&q=80&w=755",
-        title: "Artistic Vision",
-        cols: 1,
-        rows: 1,
-    },
-];
 
 function srcset(image, size, rows = 1, cols = 1) {
     return {
@@ -63,15 +18,24 @@ function srcset(image, size, rows = 1, cols = 1) {
 
 export default function ProfilePage() {
     const [activeTab, setActiveTab] = useState("portfolio");
-    const user = useAuthStore((state) => state.user);
     const feed = useFeed((state) => state.feed);
     const selectedPost = useFeed((state) => state.selectedPost);
     const selectPost = useFeed((state) => state.selectPost);
     const token = useAuthStore((state) => state.token);
+    const user = useAuthStore((state) => state.user);
 
     const fetchPortfolio = useFeed((state) => state.fetchPortfolio);
     const fetchLikedPosts = useFeed((state) => state.fetchLikedPosts);
     const fetchSavedPosts = useFeed((state) => state.fetchSavedPosts);
+
+    const loading = useProfileStore((state) => state.loading);
+    const userProfileData = useProfileStore((state) => state.userProfileData);
+    const fetchProfileData = useProfileStore((state) => state.fetchProfileData);
+
+    useEffect(() => {
+        fetchProfileData(user.id);
+    }, []);
+
     useEffect(() => {
         switch (activeTab) {
             case "portfolio":
@@ -85,6 +49,9 @@ export default function ProfilePage() {
                 break;
         }
     }, [activeTab]);
+    if (loading || !userProfileData) {
+        return <div className="loading">Cargando perfil...</div>;
+    }
 
     return (
         <>
@@ -107,30 +74,34 @@ export default function ProfilePage() {
                             </div>
                         </div>
 
-                        <h1 className="profile-username">{user.userName}</h1>
-                        <p className="profile-handle">@{user.userName}</p>
+                        <h1 className="profile-username">
+                            {userProfileData.userName}
+                        </h1>
+                        <p className="profile-handle">
+                            @{userProfileData.userName}
+                        </p>
 
                         <p className="profile-description">
-                            {user.extra.description}
+                            {userProfileData.extra.description}
                         </p>
 
                         <div className="profile-stats">
                             <div className="stat-item">
                                 <span className="stat-label">Seguidores</span>
                                 <span className="stat-value">
-                                    {user.extra.followers}
+                                    {userProfileData.extra.followers}
                                 </span>
                             </div>
                             <div className="stat-item">
                                 <span className="stat-label">Me gusta</span>
                                 <span className="stat-value">
-                                    {user.extra.LikePost}
+                                    {userProfileData.extra.totalLikesReceived}
                                 </span>
                             </div>
                             <div className="stat-item">
                                 <span className="stat-label">Siguiendo</span>
                                 <span className="stat-value">
-                                    {user.extra.following}
+                                    {userProfileData.extra.following}
                                 </span>
                             </div>
                         </div>
@@ -201,8 +172,8 @@ export default function ProfilePage() {
                             rowHeight={200}
                         >
                             {feed.map((item) => {
-                                const rows = 2
-                                const cols = 1
+                                const rows = 2;
+                                const cols = 1;
                                 return (
                                     <ImageListItem
                                         key={item.id}
