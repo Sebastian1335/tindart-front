@@ -168,7 +168,7 @@ export default function ProfilePage() {
                                 "&::-webkit-scrollbar": { display: "none" },
                             }}
                             variant="quilted"
-                            cols={3}
+                            cols={4}
                             rowHeight={200}
                         >
                             {feed.map((item) => {

@@ -39,6 +39,7 @@ export const Feed = () => {
                 }}
                 cols={4}
                 rowHeight={200}
+                variant="quilted"
             >
                 {feed.map((item, index) => {
                     // crea variedad de tamaños visuales
