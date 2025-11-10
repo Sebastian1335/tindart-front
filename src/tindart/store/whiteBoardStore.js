@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { getSnapshot, getWhiteboards } from "../api/getRequest";
 import { useAuthStore } from "../../Auth/store/authStore";
-import { createWhiteboard } from "../api/postrequiest";
+import { createWhiteboard } from "../api/postRequiest";
 import { updateWhiteboard } from "../api/putRequest";
 import { persist } from "zustand/middleware";
 
