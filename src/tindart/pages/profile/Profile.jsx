@@ -21,7 +21,6 @@ export default function ProfilePage() {
     const feed = useFeed((state) => state.feed);
     const selectedPost = useFeed((state) => state.selectedPost);
     const selectPost = useFeed((state) => state.selectPost);
-    const token = useAuthStore((state) => state.token);
     const user = useAuthStore((state) => state.user);
 
     const fetchPortfolio = useFeed((state) => state.fetchPortfolio);
@@ -39,13 +38,13 @@ export default function ProfilePage() {
     useEffect(() => {
         switch (activeTab) {
             case "portfolio":
-                fetchPortfolio(token, 1, 20);
+                fetchPortfolio(1, 20);
                 break;
             case "liked":
-                fetchLikedPosts(token, 1, 20);
+                fetchLikedPosts(1, 20);
                 break;
             case "guardados":
-                fetchSavedPosts(token, 1, 20);
+                fetchSavedPosts(1, 20);
                 break;
         }
     }, [activeTab]);

@@ -11,7 +11,7 @@ import { Comment } from "../coments/Comment";
 import { useEffect } from "react";
 import { useAuthStore } from "../../../Auth/store/authStore";
 import { useForm } from "../../../hooks/useForm";
-import { fetchToggleLike, fetchToggleSave, fetchToggleShare } from "../../api/postrequiest";
+import { fetchToggleLike, fetchToggleSave, fetchToggleShare } from "../../api/postRequiest";
 
 const initialValues = {
     content: ""
@@ -38,7 +38,7 @@ export const DetailModal = () => {
 
 
     useEffect(() => {
-        postDetails(token , selectedPost.id)
+        postDetails(selectedPost.id)
     }, [])
     
     const onClickComment = async (e) => {
@@ -47,7 +47,7 @@ export const DetailModal = () => {
         Object.entries(form).forEach(([key, value]) => {
             data.append(key, value)
         })
-        const res = await publishComment(data, token, selectedPost.id)
+        const res = await publishComment(data, selectedPost.id)
         pushComment(res)
         setForm(initialValues)
     }
@@ -107,7 +107,7 @@ export const DetailModal = () => {
                                             selectedPost?.postDetails?.likedByUser ? "active" : ""
                                         }`}
                                         onClick={() => {
-                                            fetchToggleLike(token, selectedPost.id)
+                                            fetchToggleLike(selectedPost.id)
                                             toggleLike()
                                         }}
                                     >
@@ -119,7 +119,7 @@ export const DetailModal = () => {
                                             selectedPost?.postDetails?.sharedByUser ? "active" : ""
                                         }`}
                                         onClick={() => {
-                                            fetchToggleShare(token, selectedPost.id)
+                                            fetchToggleShare(selectedPost.id)
                                             toggleShare()
                                         }}
                                     >
@@ -131,7 +131,7 @@ export const DetailModal = () => {
                                             selectedPost?.postDetails?.savedByUser ? "active" : ""
                                         }`}
                                         onClick={() => {
-                                            fetchToggleSave(token, selectedPost.id)
+                                            fetchToggleSave(selectedPost.id)
                                             toggleSave()
                                         }}
                                     >
@@ -168,7 +168,7 @@ export const DetailModal = () => {
                             <div className="comments-list">
                                 {selectedPost?.comments?.map(
                                     (comment, index) => (
-                                        <Comment comment={comment} index={index} key={index} token={token}/>
+                                        <Comment comment={comment} index={index} key={index}/>
                                     )
                                 )}
                             </div>

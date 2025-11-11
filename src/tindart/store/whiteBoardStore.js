@@ -13,9 +13,8 @@ export const useWhiteboardStore = create(
         error: null,
         fetchWhiteBoardList: async () => {
             set({ fetchLoading: true, error: null });
-            const { token } = useAuthStore.getState();
             try {
-                const res = await getWhiteboards(token);
+                const res = await getWhiteboards();
                 if (!res.error) {
                     set({ whiteboardList: res });
                 } else {
@@ -29,19 +28,17 @@ export const useWhiteboardStore = create(
             }
         },
         saveWhiteBoard: async (whiteboard) => {
-            const { token } = useAuthStore.getState();
             try {
-                updateWhiteboard(token, whiteboard);
+                updateWhiteboard(whiteboard);
             } catch (error) {
                 set({ error: error.message });
                 console.log(error);
             }
         },
         createWhiteboard: async (whiteboard) => {
-            const { token } = useAuthStore.getState();
             const { fetchWhiteBoardList } = useWhiteboardStore.getState(); 
             try {
-                createWhiteboard(token, whiteboard);
+                createWhiteboard(whiteboard);
                 fetchWhiteBoardList()
             } catch (error) {
                 set({ error: error.message });
@@ -52,9 +49,8 @@ export const useWhiteboardStore = create(
             set({ selectedWhiteBoard: whiteboard });
         },
         getSnapshot: async (id) => {
-            const { token } = useAuthStore.getState();
             try {
-                const snapshot = await getSnapshot(token, id);
+                const snapshot = await getSnapshot(id);
                 set((state) => ({
                     selectedWhiteBoard: {
                         ...state.selectedWhiteBoard,

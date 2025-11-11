@@ -1,88 +1,32 @@
-
-// const url = process.env.VITE_ENV_API_URL
-const url = import.meta.env.VITE_API_URL;
+import { apiClient } from "../../api/apiClient";
 
 
-export const uploadPost = async (formData, token) => {
-    const response = await fetch(`${url}/feed/post`, {
-        method: "POST",
-        headers: {
-            "Authorization": `Bearer ${token}`
-        },
-        body: formData,
-    })
+export const uploadPost = (formData) =>
+  apiClient(`/feed/post`, {
+    method: "POST",
+    body: formData,
+  });
 
-    const json = await response.json()
+export const uploadComment = (formData, postId) =>
+  apiClient(`/feed/post/${postId}/comment`, {
+    method: "POST",
+    body: formData,
+  });
 
-    return json
-}
+export const fetchToggleLike = (postId) =>
+  apiClient(`/interaction/like/post/${postId}`, { method: "POST" });
 
+export const fetchToggleSave = (postId) =>
+  apiClient(`/interaction/save/post/${postId}`, { method: "POST" });
 
-export const uploadComment = async (formData, token, postId) => {
-    const response = await fetch(`${url}/feed/post/${postId}/comment`, {
-        method: "POST",
-        headers: {
-            "Authorization": `Bearer ${token}`
-        },
-        body: formData,
-    })
+export const fetchToggleShare = (postId) =>
+  apiClient(`/interaction/share/post/${postId}`, { method: "POST" });
 
-    const json = await response.json()
-    console.log(json)
-    return json
-}
+export const fetchToggleLikeComment = (commentId) =>
+  apiClient(`/interaction/like/comment/${commentId}`, { method: "POST" });
 
-export const fetchToggleLike = async (token, postId) => {
-    const response = await fetch(`${url}/interaction/like/post/${postId}`, {
-        method: "POST",
-        headers: {
-            "Authorization": `Bearer ${token}`
-        },
-    })
-    const json = await response.json()
-    return json
-}
-export const fetchToggleSave = async (token, postId) => {
-    const response = await fetch(`${url}/interaction/save/post/${postId}`, {
-        method: "POST",
-        headers: {
-            "Authorization": `Bearer ${token}`
-        },
-    })
-    const json = await response.json()
-    return json
-}
-export const fetchToggleShare = async (token, postId) => {
-    const response = await fetch(`${url}/interaction/share/post/${postId}`, {
-        method: "POST",
-        headers: {
-            "Authorization": `Bearer ${token}`
-        },
-    })
-    const json = await response.json()
-    return json
-}
-export const fetchToggleLikeComment = async (token, commentId) => {
-    const response = await fetch(`${url}/interaction/like/comment/${commentId}`, {
-        method: "POST",
-        headers: {
-            "Authorization": `Bearer ${token}`
-        },
-    })
-    const json = await response.json()
-    return json
-}
-
-export const createWhiteboard = async (token, whiteboard) => {
-    const response = await fetch(`${url}/whiteboard`, {
-        method: "POST",
-        body: JSON.stringify(whiteboard),
-        headers: {
-            "Authorization": `Bearer ${token}`,
-            "Content-Type": "application/json", 
-        },
-    })
-
-    const json = await response.json()
-    return json
-}
+export const createWhiteboard = (whiteboard) =>
+  apiClient(`/whiteboard`, {
+    method: "POST",
+    body: JSON.stringify(whiteboard),
+  });

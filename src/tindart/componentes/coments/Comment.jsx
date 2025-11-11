@@ -1,8 +1,8 @@
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { fetchToggleLikeComment } from "../../api/postrequiest";
+import { fetchToggleLikeComment } from "../../api/postRequiest";
 import { useFeed } from "../../store/feedStore";
 
-export const Comment = ({ comment, index, token }) => {
+export const Comment = ({ comment, index}) => {
     const toggleLikeComment = useFeed((state) => state.toggleLikeComment)
     return (
         <div key={index} className="comment-card">
@@ -21,7 +21,7 @@ export const Comment = ({ comment, index, token }) => {
                         comment.liked ? "active" : ""
                     }`}
                     onClick={() => {
-                        fetchToggleLikeComment(token, comment.id);
+                        fetchToggleLikeComment(comment.id);
                         toggleLikeComment(index);
                     }}
                 >

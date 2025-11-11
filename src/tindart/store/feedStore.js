@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { uploadComment, uploadPost } from "../api/postrequiest";
+import { uploadComment, uploadPost } from "../api/postRequiest";
 import {
     fetchWithAuth,
     getPostDetais,
@@ -38,31 +38,31 @@ export const useFeed = create((set) => ({
     seeImage: () => set((state) => ({ image: !state.image })),
     loading: false,
     error: null,
-    fetchFeed: (token, page, limit) =>
-        fetchData(() => fetchWithAuth("feed", token, page, limit), set),
+    fetchFeed: (page, limit) =>
+        fetchData(() => fetchWithAuth("feed", page, limit), set),
 
-    fetchPortfolio: (token, page, limit) =>
+    fetchPortfolio: (page, limit) =>
         fetchData(
-            () => fetchWithAuth("profile/portafolio", token, page, limit),
+            () => fetchWithAuth("profile/portafolio", page, limit),
             set
         ),
 
-    fetchLikedPosts: (token, page, limit) =>
+    fetchLikedPosts: (page, limit) =>
         fetchData(
-            () => fetchWithAuth("profile/likedPosts", token, page, limit),
+            () => fetchWithAuth("profile/likedPosts",  page, limit),
             set
         ),
 
-    fetchSavedPosts: (token, page, limit) =>
+    fetchSavedPosts: (page, limit) =>
         fetchData(
-            () => fetchWithAuth("profile/savedPosts", token, page, limit),
+            () => fetchWithAuth("profile/savedPosts",  page, limit),
             set
         ),
 
-    postDetails: async (token, postId) => {
+    postDetails: async (postId) => {
         set({ loading: true, error: null });
         try {
-            const res = await getPostDetais(token, postId);
+            const res = await getPostDetais(postId);
             if (!res.error) {
                 set((state) => ({
                     selectedPost: { ...state.selectedPost, ...res },
@@ -175,14 +175,14 @@ export const publishArt = create((set) => ({
         set(() => ({
             publish: formValue,
         })),
-    publishPost: async (formData, token) => {
+    publishPost: async (formData) => {
         set({ loading: true, error: null });
         try {
-            const res = await uploadPost(formData, token);
+            const res = await uploadPost(formData);
             if (!res.error) {
                 set({ publish: res });
                 const { fetchFeed } = useFeed.getState();
-                await fetchFeed(token, 1, 20);
+                await fetchFeed(1, 20);
             } else {
                 set({ error: res.error });
             }
@@ -202,10 +202,10 @@ export const postComment = create((set) => ({
         set(() => ({
             comment: formValue,
         })),
-    publishComment: async (formData, token, postId) => {
+    publishComment: async (formData, postId) => {
         set({ loading: true, error: null });
         try {
-            const res = await uploadComment(formData, token, postId);
+            const res = await uploadComment(formData, postId);
             if (!res.error) {
                 set({ comment: res });
                 return res;

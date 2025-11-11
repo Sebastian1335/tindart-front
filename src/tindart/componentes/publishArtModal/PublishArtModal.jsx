@@ -23,7 +23,6 @@ const PublishArtModal = ({ open, onClose }) => {
   const {form, onInputChange, setForm} = useForm(initialForm)
 
   const publishPost = publishArt((state) => state.publishPost)
-  const token = useAuthStore((state) => state.token)
   useEffect(() => {
     if (!form.file) return // 👈 evita errores si no hay archivo
 
@@ -66,7 +65,7 @@ const PublishArtModal = ({ open, onClose }) => {
       data.append(key, value)
     })
 
-    publishPost(data, token)
+    publishPost(data)
 
     onClose()
     setForm(initialForm)

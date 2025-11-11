@@ -19,3 +19,13 @@ export const login = async (body) => {
     const response = await request.json() 
     return response
 }
+
+export const refresh = async (body) => {
+    const request = await fetch(`${url}/auth/refresh`, {
+        method: "POST",
+        body,
+        headers: { "Content-Type": "application/json", }, 
+    })
+    const response = await request.json()
+    return response
+}

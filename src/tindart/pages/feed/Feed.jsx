@@ -4,7 +4,6 @@ import "./Feed.css";
 import { useFeed } from "../../store/feedStore";
 import { DetailModal } from "../../componentes/detailModal/detailModal";
 import { useEffect } from "react";
-import { useAuthStore } from "../../../Auth/store/authStore";
 
 function srcset(image, size, rows = 1, cols = 1) {
     return {
@@ -21,9 +20,8 @@ export const Feed = () => {
     const selectedPost = useFeed((state) => state.selectedPost);
     const selectPost = useFeed((state) => state.selectPost);
     const fetchFeed = useFeed((state) => state.fetchFeed);
-    const token = useAuthStore((state) => state.token);
     useEffect(() => {
-        fetchFeed(token, 1, 20);
+        fetchFeed(1, 20);
     }, []);
 
     return (
