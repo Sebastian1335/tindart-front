@@ -1,10 +1,12 @@
-import React from "react";
+import ChatSidebar from "../../componentes/chat/ChatSidebar"
+import ChatMain from "../../componentes/chat/ChatMain"
+import "../chat/Chat.css"
 
 export const Chat = () => {
   return (
-    <div style={{ padding: 16 }}>
-      <h2>Chat</h2>
-      <p>EN PROCESO PAPURROS</p>
+    <div className="chat-container">
+      <ChatSidebar />
+      <ChatMain />
     </div>
-  );
-};
+  )
+}
