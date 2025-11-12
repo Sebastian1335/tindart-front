@@ -1,6 +1,7 @@
 import SettingsIcon from "@mui/icons-material/Settings"
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone"
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline"
+import EmailIcon from '@mui/icons-material/Email';
 import { Link } from "react-router"
 import { ProfilePopOver } from "../profilePopOver/profilePopOver"
 import { useState } from "react"
@@ -42,6 +43,10 @@ export const NavBar = ({profilePopoverOpen, setProfilePopoverOpen, handleOpenPub
           <button className="nav-icon-btn notification-btn">
             <NotificationsNoneIcon sx={{ fontSize: 20 }} />
             <span className="notification-badge">2</span>
+          </button>
+
+          <button className="nav-icon-btn chat-btn">
+            <EmailIcon sx={{ fontSize: 20 }} />
           </button>
 
           <button 
