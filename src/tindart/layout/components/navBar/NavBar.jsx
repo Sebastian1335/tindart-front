@@ -45,10 +45,10 @@ export const NavBar = ({profilePopoverOpen, setProfilePopoverOpen, handleOpenPub
             <span className="notification-badge">2</span>
           </button>
 
-          <button className="nav-icon-btn chat-btn">
+          <Link to="/feed/chat" className="nav-icon-btn chat-btn" aria-label="Chat">
             <EmailIcon sx={{ fontSize: 20 }} />
-          </button>
-
+          </Link>
+          
           <button 
             className="nav-icon-btn settings-btn"
             onClick={() => setSettingsOpen(!settingsOpen)}
