@@ -31,7 +31,7 @@ export const NavBar = ({profilePopoverOpen, setProfilePopoverOpen, handleOpenPub
             + Publicar arte
           </a>
           <Link to={"/feed/whiteboardList"}>Whiteboard</Link>
-          <a href="#">Tienda</a>
+           <Link to={"/feed/tienda"}>Tienda</Link>
         </div>
 
         <div className="nav-icons">
@@ -63,7 +63,6 @@ export const NavBar = ({profilePopoverOpen, setProfilePopoverOpen, handleOpenPub
             onMouseLeave={() => setProfilePopoverOpen(false)}
           >
             <button className="nav-icon-btn profile-btn">
-              <img src="/icono.png" alt="Profile" className="profile-avatar" />
               <Link to={"/feed/Profile"}>Profile</Link>
             </button>
 
