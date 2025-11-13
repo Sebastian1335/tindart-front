@@ -26,6 +26,7 @@ export default function ProfilePage() {
     const fetchPortfolio = useFeed((state) => state.fetchPortfolio);
     const fetchLikedPosts = useFeed((state) => state.fetchLikedPosts);
     const fetchSavedPosts = useFeed((state) => state.fetchSavedPosts);
+    const fetchComisiones = useFeed((state) => state.fetchComisiones);
 
     const loading = useProfileStore((state) => state.loading);
     const userProfileData = useProfileStore((state) => state.userProfileData);
@@ -39,6 +40,9 @@ export default function ProfilePage() {
         switch (activeTab) {
             case "portfolio":
                 fetchPortfolio(1, 20);
+                break;
+            case "comisiones":
+                fetchComisiones(1, 20);
                 break;
             case "liked":
                 fetchLikedPosts(1, 20);
@@ -122,6 +126,16 @@ export default function ProfilePage() {
                                     onClick={() => setActiveTab("portfolio")}
                                 >
                                     Portafolio
+                                </button>
+                                <button
+                                    className={`tab-btn ${
+                                        activeTab === "comisiones"
+                                            ? "active"
+                                            : ""
+                                    }`}
+                                    onClick={() => setActiveTab("comisiones")}
+                                >
+                                    Comisiones
                                 </button>
                                 <button
                                     className={`tab-btn ${
