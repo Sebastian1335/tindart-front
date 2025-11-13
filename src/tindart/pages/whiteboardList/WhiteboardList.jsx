@@ -15,14 +15,14 @@ export const WhiteboardList = () => {
 
     useEffect(() => {
       fetchWhiteBoardList()
-    }, [whiteboards])
+    }, [open])
     
-
+    
     const handleOpen = (e) => {
         e.currentTarget.blur(); // 👈 1️⃣ Quita el foco del botón antes de abrir el modal
         setOpen(true);
     };
-
+    
     const onClickCard = (w) => {
         selectWhiteBoard(w)
         navigate("/feed/whiteboard")
