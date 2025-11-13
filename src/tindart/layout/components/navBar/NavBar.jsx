@@ -62,15 +62,13 @@ export const NavBar = ({profilePopoverOpen, setProfilePopoverOpen, handleOpenPub
             onMouseEnter={() => setProfilePopoverOpen(true)}
             onMouseLeave={() => setProfilePopoverOpen(false)}
           >
-            <button className="nav-icon-btn profile-btn">
-              <img src="/icono.png" />
-              <Link to={"/feed/Profile"}>Profile</Link>
-            </button>
+          <Link to="/feed/Profile" className="nav-icon-btn profile-btn">
+            <img src="/icono.png" alt="Profile" />
+            <span>Profile</span>
+          </Link>
 
-            {profilePopoverOpen && (
-              <ProfilePopOver/>
-            )}
-          </div>
+  {profilePopoverOpen && <ProfilePopOver />}
+</div>
         </div>
       </nav>
   )
