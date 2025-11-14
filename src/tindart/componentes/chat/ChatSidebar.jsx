@@ -1,23 +1,31 @@
+// src/tindart/componentes/chat/ChatSidebar.jsx
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline"
 import "./ChatSidebar.css"
 
-const ChatSidebar = () => {
+const ChatSidebar = ({ onSelect, hideHeader = false }) => {
   const conversations = Array(15).fill({
+    id: 1,
     name: "FloppaLoopie",
     preview: "GAGAGAGAGAGAGAGA...",
   })
 
   return (
     <div className="sidebar-container">
-      <div className="sidebar-header">
-        <span className="sidebar-title">Mensajes</span>
-        <ChatBubbleOutlineIcon className="sidebar-icon" />
-      </div>
+      {!hideHeader && (
+        <div className="sidebar-header">
+          <span className="sidebar-title">Mensajes</span>
+          <ChatBubbleOutlineIcon className="sidebar-icon" />
+        </div>
+      )}
 
       <div className="sidebar-list">
         {conversations.map((conversation, i) => (
           <div key={i} className="sidebar-list-item">
-            <button className="sidebar-list-button">
+            <button
+              className="sidebar-list-button"
+              onClick={() => onSelect && onSelect(conversation)}
+              type="button"
+            >
               <div className="sidebar-avatar">F</div>
               <div className="sidebar-content">
                 <div className="sidebar-name">{conversation.name}</div>
