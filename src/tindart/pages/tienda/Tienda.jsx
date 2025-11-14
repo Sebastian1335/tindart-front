@@ -1,9 +1,7 @@
-"use client"
-
 import { useState } from "react"
-import FavoriteIcon from "@mui/icons-material/Favorite"
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart"
-import CloseIcon from "@mui/icons-material/Close"
+import { ProductCard } from "../../componentes/tienda/ProductCard"
+import { PurchaseModal } from "../../componentes/tienda/PurchaseModal"
+import { ProductDetailModal } from "../../componentes/tienda/ProductDetailModal"
 import "./Tienda.css"
 
 const PRODUCTS = [
@@ -11,10 +9,26 @@ const PRODUCTS = [
     id: 1,
     image: "/comision.png",
     price: 120.0,
-    title: "Icono de perfil",
+    title: "Icon para perfil personalizado",
     description:
-      "Hermoso icono de perfil de estilo anime con tonos rosados y detalles mágicos. Perfecto para redes sociales y perfiles personalizados.",
+      "NO AI ALLOWED\n30 250x250px digital icono bases in CSP and PSD format.\nSupported for programs that can open CSP and PSD files.\nSimple understanding of the drawing software/layers is needed.",
     tags: ["anime", "rosa", "kawaii", "perfil"],
+    included: [
+      "File in CSP and PSD format",
+      "3 minute speedpaint of me using a base with visible layers",
+      "Finished example emote in CSP and PSD format",
+      "Written .",
+      "Emotes",
+      "Using the bases for emotes for yourself",
+      "Using the bases to make emotes to then sell them on kofi/etsy/etc",
+      "Using the bases for commissions",
+      "Edit the base however you like feel free to delete my shading if you don't want it",
+    ],
+    notAllowed: [
+      "Sharing the bases with other people",
+      "Reselling the bases but edited",
+      "Sharing the bases with other people, please buy multiple copies",
+    ],
   },
   {
     id: 2,
@@ -70,23 +84,68 @@ const PRODUCTS = [
       "Hermoso icono de perfil de estilo anime con tonos rosados y detalles mágicos. Perfecto para redes sociales y perfiles personalizados.",
     tags: ["anime", "rosa", "kawaii", "perfil"],
   },
-  
+  {
+    id: 8,
+    image: "/comision.png",
+    price: 120.0,
+    title: "Icono de perfil",
+    description:
+      "Hermoso icono de perfil de estilo anime con tonos rosados y detalles mágicos. Perfecto para redes sociales y perfiles personalizados.",
+    tags: ["anime", "rosa", "kawaii", "perfil"],
+  },
+  {
+    id: 9,
+    image: "/comision.png",
+    price: 120.0,
+    title: "Icono de perfil",
+    description:
+      "Hermoso icono de perfil de estilo anime con tonos rosados y detalles mágicos. Perfecto para redes sociales y perfiles personalizados.",
+    tags: ["anime", "rosa", "kawaii", "perfil"],
+  },
+  {
+    id: 10,
+    image: "/comision.png",
+    price: 120.0,
+    title: "Icono de perfil",
+    description:
+      "Hermoso icono de perfil de estilo anime con tonos rosados y detalles mágicos. Perfecto para redes sociales y perfiles personalizados.",
+    tags: ["anime", "rosa", "kawaii", "perfil"],
+  },
+  {
+    id: 11,
+    image: "/comision.png",
+    price: 120.0,
+    title: "Icono de perfil",
+    description:
+      "Hermoso icono de perfil de estilo anime con tonos rosados y detalles mágicos. Perfecto para redes sociales y perfiles personalizados.",
+    tags: ["anime", "rosa", "kawaii", "perfil"],
+  },
+  {
+    id: 12,
+    image: "/comision.png",
+    price: 120.0,
+    title: "Icono de perfil",
+    description:
+      "Hermoso icono de perfil de estilo anime con tonos rosados y detalles mágicos. Perfecto para redes sociales y perfiles personalizados.",
+    tags: ["anime", "rosa", "kawaii", "perfil"],
+  },
 ]
 
 export const Tienda = () => {
   const [selectedProduct, setSelectedProduct] = useState(null)
-  const [likedProducts, setLikedProducts] = useState(new Set())
+  const [modalView, setModalView] = useState("detail")
 
-  const toggleLike = (productId) => {
-    setLikedProducts((prev) => {
-      const newLikes = new Set(prev)
-      if (newLikes.has(productId)) {
-        newLikes.delete(productId)
-      } else {
-        newLikes.add(productId)
-      }
-      return newLikes
-    })
+  const openModal = (product) => {
+    setSelectedProduct(product)
+    setModalView("detail")
+  }
+
+  const closeModal = () => {
+    setSelectedProduct(null)
+  }
+
+  const proceedToPurchase = () => {
+    setModalView("purchase")
   }
 
   return (
@@ -94,86 +153,29 @@ export const Tienda = () => {
       <div className="tienda-container">
         <div className="products-grid">
           {PRODUCTS.map((product) => (
-            <div key={product.id} className="product-card" onClick={() => setSelectedProduct(product)}>
-              <div className="product-image-wrapper">
-                <img src={product.image || "/placeholder.svg"} alt={product.title} className="product-image" />
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    toggleLike(product.id)
-                  }}
-                  className="like-button"
-                >
-                  <FavoriteIcon className={likedProducts.has(product.id) ? "heart-icon active" : "heart-icon"} />
-                </button>
-              </div>
-              <div className="product-info">
-                <p className="product-price">PEN {product.price.toFixed(2)}</p>
-                <p className="product-title">{product.title}</p>
-              </div>
-            </div>
+            <ProductCard
+              key={product.id}
+              product={product}
+              onClick={() => openModal(product)}
+            />
           ))}
         </div>
       </div>
 
       {selectedProduct && (
         <div className="product-modal-overlay">
-          <div className="product-modal">
-            <button onClick={() => setSelectedProduct(null)} className="close-button">
-              <CloseIcon className="close-icon" />
-            </button>
-
-            <div className="modal-content">
-              <h2 className="modal-title">{selectedProduct.title}</h2>
-
-              <div className="modal-main">
-                <div className="modal-image-container">
-                  <img
-                    src={selectedProduct.image || "/placeholder.svg"}
-                    alt={selectedProduct.title}
-                    className="modal-image"
-                  />
-                </div>
-
-                <div className="modal-sidebar">
-                  <div className="modal-description">
-                    <p>{selectedProduct.description}</p>
-                  </div>
-
-                  <div className="modal-tags-section">
-                    <h3 className="tags-title">Tags</h3>
-                    <div className="tags-container">
-                      {selectedProduct.tags.map((tag) => (
-                        <span key={tag} className="tag-button">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="modal-actions">
-                    <div className="price-box">
-                      <p className="price-label">Precio</p>
-                      <p className="price-value">PEN {selectedProduct.price.toFixed(2)}</p>
-                    </div>
-
-                    <div className="action-buttons">
-                      <button onClick={() => toggleLike(selectedProduct.id)} className="action-button like-action">
-                        <FavoriteIcon
-                          className={likedProducts.has(selectedProduct.id) ? "action-icon active" : "action-icon"}
-                        />
-                        Me gusta
-                      </button>
-                      <button className="action-button buy-action">
-                        <ShoppingCartIcon className="action-icon" />
-                        Comprar
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          {modalView === "detail" ? (
+            <ProductDetailModal 
+              product={selectedProduct} 
+              onClose={closeModal}
+              onStartOrder={proceedToPurchase}
+            />
+          ) : (
+            <PurchaseModal
+              product={selectedProduct}
+              onClose={closeModal}
+            />
+          )}
         </div>
       )}
     </>
