@@ -2,7 +2,7 @@ import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline"
 import "./ChatSidebar.css"
 
 const ChatSidebar = () => {
-  const conversations = Array(10).fill({
+  const conversations = Array(15).fill({
     name: "FloppaLoopie",
     preview: "GAGAGAGAGAGAGAGA...",
   })

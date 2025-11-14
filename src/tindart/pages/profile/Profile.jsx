@@ -42,7 +42,7 @@ export default function ProfilePage() {
                 fetchPortfolio(1, 20);
                 break;
             case "comisiones":
-                fetchComisiones(1, 20);
+                // fetchComisiones(1, 20);
                 break;
             case "liked":
                 fetchLikedPosts(1, 20);

@@ -8,13 +8,10 @@ const ChatMain = () => {
   const [message, setMessage] = useState("")
 
   const messages = [
-    {
-      type: "image",
-      src: "fondo perfil.png",
-    },
-    { type: "text", text: "LO AMO T_T" },
-    { type: "text", text: "LO AMO T_T" },
-    { type: "text", text: "LO AMO T_T" },
+    { sender: "other", type: "image", src: "fondo perfil.png" },
+    { sender: "other", type: "text", text: "Bro mira esto XD" },
+    { sender: "me", type: "text", text: "JAJSAJDJSAD lo amo T_T" },
+    { sender: "me", type: "text", text: "Manda más fotos" },
   ]
 
   const handleSend = () => {
@@ -38,17 +35,25 @@ const ChatMain = () => {
 
       <div className="main-messages">
         {messages.map((msg, i) => (
-          <div key={i} className="message-wrapper">
+          <div
+            key={i}
+            className={`message-wrapper ${msg.sender === "me" ? "me" : "other"}`}
+          >
+            {msg.sender === "other" && <div className="message-avatar">F</div>}
+
             {msg.type === "image" ? (
               <div className="message-image">
-                <img src={msg.src || "/placeholder.svg"} alt="Drawing" />
+                <img src={msg.src} alt="msg" />
               </div>
             ) : (
-              <div className="message-bubble">
+              <div className={`message-bubble ${msg.sender}`}>
                 <p className="message-text">{msg.text}</p>
               </div>
             )}
-            <div className="message-avatar">F</div>
+
+            {msg.sender === "me" && (
+              <div className="message-avatar me-avatar">Tú</div>
+            )}
           </div>
         ))}
       </div>
@@ -58,6 +63,7 @@ const ChatMain = () => {
           <button className="main-input-button">
             <AttachFileIcon fontSize="small" />
           </button>
+
           <input
             type="text"
             className="main-input-field"
@@ -71,7 +77,12 @@ const ChatMain = () => {
               }
             }}
           />
-          <button onClick={handleSend} disabled={!message.trim()} className="main-send-button">
+
+          <button
+            onClick={handleSend}
+            disabled={!message.trim()}
+            className="main-send-button"
+          >
             <SendIcon fontSize="small" />
           </button>
         </div>
