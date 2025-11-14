@@ -1,0 +1,43 @@
+.chat-dock {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 9999;
+  background: #1f1f23;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  color: #f2f2f2;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+  overflow: hidden;
+  transition: width 160ms ease, height 160ms ease;
+}
+
+/* Minimizado = barra pequeña */
+.chat-dock.minimized { width: 300px; height: 54px; }
+
+/* Abierto = panel compacto con lista+chat */
+.chat-dock.open { width: 720px; height: 520px; }
+
+.dock-header {
+  height: 54px; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0));
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.dock-title { font-weight: 600; font-size: 14px; }
+.dock-actions { display: flex; align-items: center; gap: 6px; }
+.icon-btn { background: transparent; border: 0; color: inherit; cursor: pointer; padding: 4px; border-radius: 8px; }
+.icon-btn:hover { background: rgba(255,255,255,0.08); }
+.chev { transition: transform 160ms ease; }
+.chev.up { transform: rotate(180deg); }
+
+.dock-body { display: grid; grid-template-columns: 260px 1fr; height: calc(100% - 54px); }
+
+/* Reusar componentes dentro con un contenedor adecuado */
+.dock-sidebar { border-right: 1px solid rgba(255,255,255,0.06); height: 100%; overflow: hidden; }
+.dock-main { height: 100%; overflow: hidden; }
+
+/* Opcional: hacer scroll interno de sus listas si lo requieren */
+.dock-sidebar .sidebar-list { max-height: calc(100% - 52px); overflow-y: auto; }
+.dock-main .main-messages { height: calc(100% - 56px - 56px); } 
