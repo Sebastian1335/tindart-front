@@ -44,7 +44,7 @@ export const NavBar = ({profilePopoverOpen, setProfilePopoverOpen, handleOpenPub
             <NotificationsNoneIcon sx={{ fontSize: 20 }} />
             <span className="notification-badge">2</span>
           </button>
-
+          
           <Link to="/feed/chat" className="nav-icon-btn chat-btn" aria-label="Chat">
             <EmailIcon sx={{ fontSize: 20 }} />
           </Link>
