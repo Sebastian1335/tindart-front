@@ -1,13 +1,18 @@
-// src/tindart/componentes/chat/ChatSidebar.jsx
-import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline"
-import "./ChatSidebar.css"
+import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
+import "./ChatSidebar.css";
 
+/**
+ * onSelect(item): callback al hacer click en una conversación.
+ * hideHeader: oculta el header cuando se usa dentro del dock.
+ */
 const ChatSidebar = ({ onSelect, hideHeader = false }) => {
-  const conversations = Array(15).fill({
-    id: 1,
+    const conversations = Array.from({ length: 12 }).map((_, i) => ({
+    id: i + 1,
     name: "FloppaLoopie",
     preview: "GAGAGAGAGAGAGAGA...",
-  })
+    avatar:
+      "/icono.png",
+  }));
 
   return (
     <div className="sidebar-container">
@@ -19,14 +24,24 @@ const ChatSidebar = ({ onSelect, hideHeader = false }) => {
       )}
 
       <div className="sidebar-list">
-        {conversations.map((conversation, i) => (
-          <div key={i} className="sidebar-list-item">
+        {conversations.map((conversation) => (
+          <div key={conversation.id} className="sidebar-list-item">
             <button
               className="sidebar-list-button"
-              onClick={() => onSelect && onSelect(conversation)}
+              onClick={() =>
+                onSelect &&
+                onSelect({
+                  id: conversation.id,
+                  name: conversation.name,
+                  avatar: conversation.avatar,
+                })
+              }
               type="button"
             >
-              <div className="sidebar-avatar">F</div>
+              <div
+                className="sidebar-avatar"
+                style={{ backgroundImage: `url(${conversation.avatar})` }}
+              />
               <div className="sidebar-content">
                 <div className="sidebar-name">{conversation.name}</div>
                 <div className="sidebar-preview">{conversation.preview}</div>
@@ -36,7 +51,7 @@ const ChatSidebar = ({ onSelect, hideHeader = false }) => {
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ChatSidebar
+export default ChatSidebar;
