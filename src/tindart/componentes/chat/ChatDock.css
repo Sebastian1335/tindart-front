@@ -13,9 +13,9 @@
 }
 
 /* Tamaños por modo */
-.chat-dock.minimized { width: 300px; height: 54px; }
-.chat-dock.list      { width: 420px; height: 600px; }
-.chat-dock.convo     { width: 520px; height: 600px; }
+.chat-dock.minimized { width: 380px; height: 54px; }
+.chat-dock.list      { width: 420px; height: 620px; }
+.chat-dock.convo     { width: 520px; height: 620px; }
 
 /* Header */
 .dock-header {

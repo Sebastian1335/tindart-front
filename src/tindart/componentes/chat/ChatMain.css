@@ -72,7 +72,7 @@
 }
 .message-wrapper {
   display: flex;
-  align-items: flex-end; /* mantiene avatar alineado abajo con burbuja */
+  align-items: flex-end;
   gap: 10px;
   max-width: 80%;
 }
@@ -90,16 +90,15 @@
 
 /* BURBUJAS */
 .message-bubble {
-  display: flex;           /* convierte la burbuja en contenedor flex */
-  align-items: center;     /* centra el texto verticalmente */
+  display: flex;          
+  align-items: center;     
   padding: 10px 16px;
   border-radius: 18px;
   max-width: 360px;
-  /* eliminar max-height que recortaba el contenido */
-  /* max-height: 50px; <-- REMOVIDO */
+  
   word-wrap: break-word;
-  white-space: normal;     /* permitir que el texto haga wrap en varias líneas */
-  line-height: 1.3;        /* buena separación vertical del texto */
+  white-space: normal;    
+  line-height: 1.3;       
 }
 .message-bubble.other {
   background-color: #342d34;
@@ -108,7 +107,7 @@
 }
 
 .message-bubble.me {
-  background-color: #e91ece;
+  background-color: #9a4dff;
   color: white;
   border-top-right-radius: 4px;
 }
