@@ -1,65 +1,76 @@
 import { create } from "zustand";
 import { socket } from "../../config/socket";
 import { useAuthStore } from "../../Auth/store/authStore";
+import { socketService } from "../../services/socketService";
 
 
 export const useChatStore = create((set, get) => ({
     messages: [],
+    conversations: [],
     users: [],
     connected: false,
     connect: () => {
         if (get().connected) return;
-        socket.connect();
-        set({connected: true});
-        socket.on("connect", () => {
-            console.log("Socket conectado", socket.id);
-        });
-        socket.on("private_message", (msg) => {
-            set((state) => ({
-                messages: [state.messages, msg]
-            }))
-        });
-        socket.on("message_ack", (ack) => {
-            set((state) => ({
-                messages: state.messages.map((msg) => {
-                    msg.id === ack.provisionalId
-                        ? {
-                            ...msg,
-                            id: ack.realId,
-                            status: "sent",
-                            createdAt: ack.createdAt
-                        }
-                        : msg
-                })
-            }))
+
+        socketService.connect({
+            onMessage: (msg) => get().addMessages(msg),
+            onMessagesRead: (conversationId, userId) => {
+                set((state) => ({
+                    messages: state.messages.map((m) =>
+                        m.conversationId === conversationId && m.fromId !== userId
+                            ? { ...m, status: "READ" }
+                            : m
+                    ),
+                }));
+            },
+            onTyping: (conversationId, fromId) => {
+                console.log("Typing", conversationId, fromId);
+            },
+            onOnlineUsers: (users) => get().setOnlineUsers(users),
         })
-        socket.on("users_update", (users) => {
-            set({users})
-        })
+        set({connected: true})
     },
+
     disconnect: () => {
-        if (!get().connected) return;
-        socket.disconnect();
-        set({connected: false});
-        console.log("Socket desconectado")
+        socketService.disconnect();
+        set({ connected: false });
     },
-    sendMessage: (text, toUserId, post = null) => {
-        const {user} = useAuthStore.getState()
-        const msg = {
+
+    sendMessage: (text, conversationId, postId) => {
+        const { user } = useAuthStore.getState();
+        const message = {
             id: Date.now(),
             text,
-            post: post,
-            from: user.id,
-            to: toUserId,
+            fromId: user.id,
+            conversationId,
+            postId: postId || null,
+            status: "PENDING",
             createdAt: new Date().toISOString(),
-            status: "sending"
         };
-        socket.emit("message", msg);
-
+        get().addMessage(message);
+        socketService.sendMessage({ text, conversationId, postId });
+    },
+    markRead: (conversationId) => {
+        socketService.markRead(conversationId);
         set((state) => ({
-            messages: [...state.messages, msg]
-        }))
-    }
+            messages: state.messages.map((m) =>
+                m.conversationId === conversationId ? { ...m, status: "READ" } : m
+            ),
+        }));
+    },
+
+    typing: (conversationId) => {
+        socketService.typing(conversationId);
+    },
+
+    addMessage: (msg) => {
+        set((state) => ({ messages: [...state.messages, msg] }));
+    },
+
+    setOnlineUsers: (users) => {
+        set({ onlineUsers: users });
+    },
+
 }))
 
 
