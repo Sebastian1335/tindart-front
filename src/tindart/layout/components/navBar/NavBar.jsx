@@ -1,6 +1,7 @@
 import SettingsIcon from "@mui/icons-material/Settings"
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone"
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline"
+import EmailIcon from '@mui/icons-material/Email';
 import { Link } from "react-router"
 import { ProfilePopOver } from "../profilePopOver/profilePopOver"
 import { useState } from "react"
@@ -30,7 +31,7 @@ export const NavBar = ({profilePopoverOpen, setProfilePopoverOpen, handleOpenPub
             + Publicar arte
           </a>
           <Link to={"/feed/whiteboardList"}>Whiteboard</Link>
-          <a href="#">Tienda</a>
+           <Link to={"/feed/tienda"}>Tienda</Link>
         </div>
 
         <div className="nav-icons">
@@ -44,6 +45,10 @@ export const NavBar = ({profilePopoverOpen, setProfilePopoverOpen, handleOpenPub
             <span className="notification-badge">2</span>
           </button>
 
+          <Link to="/feed/chat" className="nav-icon-btn chat-btn" aria-label="Chat">
+            <EmailIcon sx={{ fontSize: 20 }} />
+          </Link>
+          
           <button 
             className="nav-icon-btn settings-btn"
             onClick={() => setSettingsOpen(!settingsOpen)}
@@ -57,15 +62,13 @@ export const NavBar = ({profilePopoverOpen, setProfilePopoverOpen, handleOpenPub
             onMouseEnter={() => setProfilePopoverOpen(true)}
             onMouseLeave={() => setProfilePopoverOpen(false)}
           >
-            <button className="nav-icon-btn profile-btn">
-              <img src="/icono.png" alt="Profile" className="profile-avatar" />
-              <Link to={"/feed/Profile"}>Profile</Link>
-            </button>
+          <Link to="/feed/Profile" className="nav-icon-btn profile-btn">
+            <img src="/icono.png" alt="Profile" />
+            <span>Profile</span>
+          </Link>
 
-            {profilePopoverOpen && (
-              <ProfilePopOver/>
-            )}
-          </div>
+  {profilePopoverOpen && <ProfilePopOver />}
+</div>
         </div>
       </nav>
   )

@@ -4,6 +4,8 @@ import { Feed } from "../pages/feed/Feed";
 import Profile from "../pages/profile/Profile";
 import { WhiteboardList } from "../pages/whiteboardList/WhiteboardList";
 import { Whiteboard } from "../pages/whiteboard/Whiteboard";
+import { Chat } from "../pages/chat/Chat";
+import { Tienda } from "../pages/tienda/Tienda";
 import { useAuthStore, useProfileStore } from "../../Auth/store/authStore";
 import { useEffect } from "react";
 
@@ -21,6 +23,8 @@ export const TindartRoutes = () => {
                 <Route path="/profile" element={<Profile />} />
                 <Route path="/whiteboardList" element={<WhiteboardList />} />
                 <Route path="/whiteboard" element={<Whiteboard />} />
+                <Route path="/tienda" element={<Tienda />} />
+                <Route path="/chat" element={<Chat />} />
             </Route>
         </Routes>
     );
