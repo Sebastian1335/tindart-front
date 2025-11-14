@@ -5,7 +5,7 @@ import PublishArtModal from "../componentes/publishArtModal/PublishArtModal"
 
 import { NavBar } from "./components/navBar/NavBar"
 import { SideBar } from "./components/sideBar/SideBar"
-
+import ChatDock from "../componentes/chat/ChatDock"
 const formValues = {
   busqueda: "",
 }
@@ -47,6 +47,7 @@ export const MainLayout = () => {
       </div>
 
       <PublishArtModal open={publishModalOpen} onClose={handleClosePublishModal} />
+       <ChatDock /> {/* flotante chat abajo--derecha */}
     </div>
   )
 }
