@@ -25,8 +25,16 @@ export const fetchToggleShare = (postId) =>
 export const fetchToggleLikeComment = (commentId) =>
   apiClient(`/interaction/like/comment/${commentId}`, { method: "POST" });
 
+export const fetchToggleFollowUser = (userId) =>
+  apiClient(`/interaction/follow/${userId}`, { method: "POST" });
+
 export const createWhiteboard = (whiteboard) =>
   apiClient(`/whiteboard`, {
     method: "POST",
     body: JSON.stringify(whiteboard),
   });
+
+export const createConversation = (userTwoId) => apiClient(`/chat/conversation/${userTwoId}`, {
+    method: "POST",
+  });
+

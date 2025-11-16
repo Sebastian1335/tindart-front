@@ -5,7 +5,7 @@
   height: 100vh;
   background-color: #0e0e10;
   color: white;
-  overflow: hidden;
+  overflow: visible;
 }
 
 /* ===== Navbar ===== */
@@ -270,7 +270,8 @@
   flex: 1;
   position: relative;
   background-color: #0e0e10;
-  overflow: hidden;
+  min-height: 0;
+  overflow: visible;
 }
 
 /* ===== Sidebar izquierda ===== */
@@ -359,6 +360,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  margin-top: 150px;
 }
 
 .whiteboard-item {

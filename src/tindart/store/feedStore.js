@@ -62,7 +62,8 @@ export const useFeed = create((set) => ({
     postDetails: async (postId) => {
         set({ loading: true, error: null });
         try {
-            const res = await getPostDetais(postId);
+            let res = await getPostDetais(postId);
+            res.user = {...res.user, followers: res.user.followers.length > 0 ? true : false}
             if (!res.error) {
                 set((state) => ({
                     selectedPost: { ...state.selectedPost, ...res },
@@ -100,6 +101,7 @@ export const useFeed = create((set) => ({
                     },
                 },
             };
+            console.log(updated)
             return { selectedPost: updated };
         }),
     toggleLikeComment: (index) =>
@@ -165,6 +167,21 @@ export const useFeed = create((set) => ({
             };
             return { selectedPost: updated };
         }),
+    toggleFollow: () => {
+        set((state) => {
+            if (!state.selectedPost) return {};
+            const nextState = !!!state.selectedPost.user.followers;
+            console.log(nextState)
+            const updated = {
+                ...state.selectedPost,
+                user: {
+                    ...state.selectedPost.user,
+                    followers: nextState
+                }
+            }
+            return {selectedPost: updated}
+        })
+    }
 }));
 
 export const publishArt = create((set) => ({

@@ -1,11 +1,12 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import "./MainLayout.css"
-import { Outlet } from "react-router"
+import { Outlet, useLocation } from "react-router"
 import PublishArtModal from "../componentes/publishArtModal/PublishArtModal"
 
 import { NavBar } from "./components/navBar/NavBar"
 import { SideBar } from "./components/sideBar/SideBar"
 import ChatDock from "../componentes/chat/ChatDock"
+import { useChatStore } from "../store/chatStore"
 const formValues = {
   busqueda: "",
 }
@@ -15,6 +16,8 @@ export const MainLayout = () => {
   const [formState, setFormState] = useState(formValues)
   const [publishModalOpen, setPublishModalOpen] = useState(false)
   const [profilePopoverOpen, setProfilePopoverOpen] = useState(false)
+  const location = useLocation()   
+  const connect = useChatStore((s) => s.connect);
 
   const handleOpenPublishModal = () => {
     setPublishModalOpen(true)
@@ -23,6 +26,10 @@ export const MainLayout = () => {
   const handleClosePublishModal = () => {
     setPublishModalOpen(false)
   }
+
+  useEffect(() => {
+    connect()
+  }, [])
 
   return (
     <div className={`layout ${sidebarOpen ? "expanded" : "collapsed"}`}>
@@ -47,7 +54,7 @@ export const MainLayout = () => {
       </div>
 
       <PublishArtModal open={publishModalOpen} onClose={handleClosePublishModal} />
-       <ChatDock /> {/* flotante chat abajo--derecha */}
+        {location.pathname !== "/feed/chat" && <ChatDock />}
     </div>
   )
 }

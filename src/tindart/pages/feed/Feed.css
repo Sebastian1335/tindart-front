@@ -329,3 +329,67 @@
     width: 95vw;
   }
 }
+/* ===== Autor del Post ===== */
+.post-header {
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.author-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.author-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.author-text {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.author-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.author-verified {
+  color: #ff6cab;
+  font-size: 18px;
+  line-height: 1;
+}
+
+/* ===== Botón Seguir ===== */
+.follow-btn {
+  background: transparent;
+  border: 1px solid #ff6cab;
+  padding: 8px 18px;
+  border-radius: 20px;
+  color: #ff6cab;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.follow-btn:hover {
+  background: rgba(255, 108, 171, 0.1);
+}
+
+.follow-btn.following {
+  background: linear-gradient(90deg, #ff6cab, #9a4dff);
+  border-color: transparent;
+  color: #ffffff;
+}
+
+.follow-btn.following:hover {
+  opacity: 0.9;
+}

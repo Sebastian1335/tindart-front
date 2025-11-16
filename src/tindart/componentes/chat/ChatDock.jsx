@@ -5,15 +5,20 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ChatSidebar from "./ChatSidebar";
 import ChatMain from "./ChatMain";
 import "./ChatDock.css";
+import { Link } from "react-router";
 
 export default function ChatDock() {
   const [mode, setMode] = useState("min");  
   const [active, setActive] = useState(null); 
+  
+  
   useEffect(() => {
     const onOpen = () => setMode("list");
     const onToggle = () => setMode((m) => (m === "min" ? "list" : "min"));
+
     window.addEventListener("open-chat-dock", onOpen);
     window.addEventListener("toggle-chat-dock", onToggle);
+
     return () => {
       window.removeEventListener("open-chat-dock", onOpen);
       window.removeEventListener("toggle-chat-dock", onToggle);
@@ -47,7 +52,9 @@ export default function ChatDock() {
         </div>
 
         <div className="dock-actions">
-          <ChatBubbleOutlineIcon className="dock-msg-icon" />
+          <Link to={"/feed/chat"}>
+            <ChatBubbleOutlineIcon className="dock-msg-icon "/>
+          </Link>
           <button
             className="icon-btn"
             aria-label={mode === "min" ? "Expandir" : "Minimizar"}
@@ -64,8 +71,8 @@ export default function ChatDock() {
         <div className="dock-body only-list">
           <ChatSidebar
             hideHeader
-            onSelect={(item) => {
-              setActive(item);
+            onSelect={(contactSeleccionado) => {
+              setActive(contactSeleccionado);
               setMode("chat");
             }}
           />
@@ -74,7 +81,7 @@ export default function ChatDock() {
 
       {mode === "chat" && (
         <div className="dock-body only-chat">
-          <ChatMain hideHeader />
+          <ChatMain hideHeader active={active}/>
         </div>
       )}
     </div>

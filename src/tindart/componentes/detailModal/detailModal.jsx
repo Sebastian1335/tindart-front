@@ -11,7 +11,7 @@ import { Comment } from "../coments/Comment";
 import { useEffect } from "react";
 import { useAuthStore } from "../../../Auth/store/authStore";
 import { useForm } from "../../../hooks/useForm";
-import { fetchToggleLike, fetchToggleSave, fetchToggleShare } from "../../api/postRequiest";
+import { fetchToggleFollowUser, fetchToggleLike, fetchToggleSave, fetchToggleShare } from "../../api/postRequiest";
 
 const initialValues = {
     content: ""
@@ -30,11 +30,11 @@ export const DetailModal = () => {
     const toggleLike = useFeed((state) => state.toggleLike)
     const toggleSave = useFeed((state) => state.toggleSave)
     const toggleShare = useFeed((state) => state.toggleShare)
-
+    const toggleFollow = useFeed((state) => state.toggleFollow)
     const token = useAuthStore((state) => state.token)
     const publishComment = postComment((state) => (state.publishComment))
     const pushComment = useFeed((state) => state.pushComment)
-    
+    const user = useAuthStore((state) => state.user)
 
 
     useEffect(() => {
@@ -59,10 +59,36 @@ export const DetailModal = () => {
                     <button className="close-button" onClick={diselectPost}>
                         <CloseIcon />
                     </button>
-
                     <div className="post-content">
                         <h1 className="post-title">{selectedPost?.title}</h1>
-
+                        <div className="post-header">
+                            <div className="author-info">
+                                <img
+                                    src={selectedPost?.user?.avatar || "/icono.png"}
+                                    className="author-avatar"
+                                />
+                                <div className="author-text">
+                                    <span className="author-name">
+                                        {selectedPost?.user?.userName || "Autor desconocido"}
+                                    </span>
+                                    {selectedPost?.user?.verified && (
+                                        <span className="author-verified">✔</span>
+                                    )}
+                                </div>
+                                <button
+                                    className={`follow-btn ${
+                                        !!selectedPost?.user?.followers ? "following" : ""
+                                    }`}
+                                    onClick={() => {
+                                        fetchToggleFollowUser(+selectedPost.user.id)
+                                        toggleFollow()
+                                    }}
+                                    hidden={selectedPost?.user?.id === user.id ? "hidden" : ""}
+                                >
+                                    {!!selectedPost?.user?.followers ? "Siguiendo" : "Seguir"}
+                                </button>
+                            </div>
+                        </div>
                         <div className="post-main">
                             <div className="post-image-container">
                                 <img
@@ -79,7 +105,6 @@ export const DetailModal = () => {
                                     }}
                                 />
                             </div>
-
                             <div className="post-sidebar">
                                 <p className="post-description">
                                     {selectedPost?.description}
