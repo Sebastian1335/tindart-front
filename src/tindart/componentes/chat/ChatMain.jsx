@@ -14,37 +14,75 @@ const ChatMain = ({ hideHeader = false }) => {
   const sendMessage = useChatStore((state) => state.sendMessage)
   const markRead = useChatStore((state) => state.markRead)
   const endRef = useRef(null)
+  const messagesContainerRef = useRef(null)
   const { user } = useAuthStore.getState();
-  const scrollToBottom = () => {
-    endRef.current?.scrollIntoView({ behavior: "smooth" })
-  }
   
   const conversationMessages = messages.filter(
     (m) => m.conversationId === selectedUser?.conversationId
   );
 
-
-  useEffect(() => {
-    scrollToBottom()
-  }, [conversationMessages])
+  // Función para hacer scroll al final
+  const scrollToBottom = (smooth = true) => {
+    if (messagesContainerRef.current) {
+      const container = messagesContainerRef.current
+      // Usar scrollTop directamente para mayor control
+      if (smooth) {
+        container.scrollTo({
+          top: container.scrollHeight,
+          behavior: "smooth"
+        })
+      } else {
+        container.scrollTop = container.scrollHeight
+      }
+    } else if (endRef.current) {
+      // Fallback: usar scrollIntoView
+      endRef.current.scrollIntoView({ 
+        behavior: smooth ? "smooth" : "auto",
+        block: "end",
+        inline: "nearest"
+      })
+    }
+  }
   
+  // Scroll automático cuando cambian los mensajes (nuevo mensaje enviado o recibido)
+  useEffect(() => {
+    if (conversationMessages.length > 0 && selectedUser?.conversationId) {
+      // Pequeño delay para asegurar que el DOM se haya actualizado
+      const timeoutId = setTimeout(() => {
+        scrollToBottom(true)
+      }, 100)
+      
+      return () => clearTimeout(timeoutId)
+    }
+  }, [conversationMessages.length, selectedUser?.conversationId])
+  
+  // Scroll automático al cambiar de conversación o cargar inicialmente
+  useEffect(() => {
+    if (selectedUser?.conversationId && conversationMessages.length > 0) {
+      // Scroll inmediato (sin smooth) al cambiar de conversación para que sea instantáneo
+      const timeoutId = setTimeout(() => {
+        scrollToBottom(false)
+      }, 200)
+      
+      return () => clearTimeout(timeoutId)
+    }
+  }, [selectedUser?.conversationId])
+
   const handleSend = () => {
     if (!text.trim()) return
     sendMessage(text, selectedUser.conversationId)
     setText("")
-    setTimeout(scrollToBottom, 50);
+    // Scroll inmediato después de enviar
+    setTimeout(() => {
+      scrollToBottom(true)
+    }, 50)
   }
 
   useEffect(() => {
-    scrollToBottom();
-  }, [selectedUser]);
-
-  useEffect(() => {
-      if (selectedUser?.conversationId) {
-        markRead(selectedUser.conversationId)
-      }
-
-    }, [selectedUser])
+    if (selectedUser?.conversationId) {
+      markRead(selectedUser.conversationId)
+    }
+  }, [selectedUser])
 
     if (!selectedUser) {
       return (
@@ -70,7 +108,7 @@ const ChatMain = ({ hideHeader = false }) => {
         </div>
       )}
 
-      <div className="main-messages">        
+      <div className="main-messages" ref={messagesContainerRef}>        
         {conversationMessages.map((msg, i) => (
           <div 
             key={i} 
@@ -88,7 +126,7 @@ const ChatMain = ({ hideHeader = false }) => {
           {msg.fromId === user.id && <div className="message-avatar me-avatar">Tú</div>}
           </div>
         ))}
-        {/* <div ref={endRef}/> */}
+        <div ref={endRef} className="scroll-anchor" />
       </div>
       <div className="main-input-container">
         <div className="main-input-wrapper">

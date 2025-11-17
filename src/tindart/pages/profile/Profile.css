@@ -1,16 +1,30 @@
-/* Scoped with .tindart-profile to avoid colliding with MainLayout or Feed */
+/* ============================================
+   PROFILE PAGE - Scoped with .tindart-profile
+   ============================================ */
+
+.tindart-profile {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
 .tindart-profile .profile-banner-container {
   width: 100%;
   height: 300px;
+  min-height: 200px;
   overflow: hidden;
   border-radius: 0;
   flex-shrink: 0;
+  position: relative;
 }
 
 .tindart-profile .profile-banner {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
 
 .tindart-profile .profile-content-wrapper {
@@ -18,27 +32,30 @@
   flex: 1;
   overflow: hidden;
   gap: 0;
+  min-height: 0;
 }
 
 .tindart-profile .profile-info-column {
   width: 280px;
-  padding: 40px 30px;
-  border-right: 1px solid #222222;
+  min-width: 250px;
+  padding: var(--spacing-xl) var(--spacing-xl);
+  border-right: 1px solid var(--color-border-dark);
   overflow-y: auto;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: var(--spacing-lg);
   flex-shrink: 0;
-  background: transparent; 
+  background: transparent;
 }
 
-/* Right column for portfolio */
 .tindart-profile .portfolio-column {
   flex: 1;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  padding: 20px 30px;
+  padding: var(--spacing-lg) var(--spacing-xl);
+  min-width: 0;
 }
 
 .tindart-profile .profile-avatar-wrapper {
@@ -49,43 +66,50 @@
   z-index: 10;
   display: flex;
   justify-content: center;
-  margin-bottom: 10px;
+  margin-bottom: var(--spacing-md);
 }
 
 .tindart-profile .profile-avatar-large {
   width: 175px;
   height: 175px;
-  border-radius: 50%;
+  min-width: 120px;
+  min-height: 120px;
+  border-radius: var(--radius-full);
   overflow: hidden;
   padding: 2px;
+  background: var(--gradient-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .tindart-profile .profile-avatar-large img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 50%;
+  border-radius: var(--radius-full);
+  background: var(--color-bg-secondary);
 }
 
 .tindart-profile .profile-username {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
   margin: 0;
-  color: #ffffff;
+  color: var(--color-text-primary);
   text-align: center;
 }
 
 .tindart-profile .profile-handle {
-  font-size: 14px;
-  color: #ffffff;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-tertiary);
   margin: 0;
   text-align: center;
 }
 
 .tindart-profile .profile-description {
-  font-size: 15px;
-  color: #aaaaaa;
-  margin: 10px 0 0 0;
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  margin: var(--spacing-md) 0 0 0;
   text-align: center;
   line-height: 1.4;
 }
@@ -93,118 +117,151 @@
 .tindart-profile .profile-stats {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-top: 10px;
-  padding: 20px 0;
-  border-top: 1px solid #222222;
-  border-bottom: 1px solid #222222;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-lg) 0;
+  border-top: 1px solid var(--color-border-dark);
+  border-bottom: 1px solid var(--color-border-dark);
 }
 
 .tindart-profile .stat-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 10px;
+  gap: var(--spacing-md);
 }
 
 .tindart-profile .stat-label {
-  font-size: 15px;
-  color: #888888;
+  font-size: var(--font-size-base);
+  color: var(--color-text-tertiary);
   text-transform: capitalize;
 }
 
 .tindart-profile .stat-value {
-  font-size: 16px;
-  font-weight: 600;
-  color: #ffffff;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
 }
 
 .tindart-profile .seguir-btn {
-  padding: 10px 24px;
-  color: rgb(255, 255, 255);
-  border-radius: 24px;
-  font-size: 16px;
-  font-weight: 570;
+  padding: var(--spacing-md) var(--spacing-lg);
+  color: var(--color-text-primary);
+  border-radius: var(--radius-xl);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all var(--transition-slow);
   width: 100%;
-  margin-top: 10px;
+  margin-top: var(--spacing-md);
   border: 1px solid transparent;
-  background: linear-gradient(#1b1b1f, #1b1b1f) padding-box, linear-gradient(90deg, #9a4dff, #ff6cab) border-box;
+  background: linear-gradient(var(--color-bg-secondary), var(--color-bg-secondary)) padding-box,
+    var(--gradient-primary) border-box;
 }
 
 .tindart-profile .seguir-btn:hover {
-  background: linear-gradient(90deg, #9a4dff, #ff6cab);
-  color: #ffffff;
+  background: var(--gradient-primary);
+  color: var(--color-text-primary);
+}
+
+/* ============================================
+   PROFILE HEADER ROW
+   ============================================ */
+.tindart-profile .profile-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+  flex-shrink: 0;
+  flex-wrap: wrap;
 }
 
 .tindart-profile .profile-actions {
   display: flex;
-  gap: 12px;
+  gap: var(--spacing-md);
   align-items: center;
   margin-bottom: 0;
   flex-shrink: 0;
+  flex-wrap: wrap;
 }
 
 .tindart-profile .editar-perfil-btn {
-  padding: 10px 24px;
+  padding: var(--spacing-md) var(--spacing-lg);
   border: 2px solid transparent;
-  background: linear-gradient(#1b1b1f, #1b1b1f) padding-box, linear-gradient(90deg, #9a4dff, #ff6cab) border-box;
-  color: #ffffff;
-  border-radius: 24px;
-  font-size: 14px;
-  font-weight: 600;
+  background: linear-gradient(var(--color-bg-secondary), var(--color-bg-secondary)) padding-box,
+    var(--gradient-primary) border-box;
+  color: var(--color-text-primary);
+  border-radius: var(--radius-xl);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all var(--transition-slow);
+  white-space: nowrap;
 }
 
 .tindart-profile .editar-perfil-btn:hover {
-  background: linear-gradient(90deg, #9a4dff, #ff6cab);
-  color: #ffffff;
+  background: var(--gradient-primary);
+  color: var(--color-text-primary);
 }
 
 .tindart-profile .icon-btn {
   width: 40px;
   height: 40px;
+  min-width: 40px;
+  min-height: 40px;
   border: none;
-  background-color: #2E2D34;
-  color: #ffffff;
+  background-color: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  transition: background-color 0.3s ease;
+  border-radius: var(--radius-full);
+  transition: background-color var(--transition-slow);
 }
 
-/* Tabs */
+.tindart-profile .icon-btn:hover {
+  background-color: var(--color-bg-quaternary);
+}
+
+/* ============================================
+   PROFILE TABS
+   ============================================ */
 .tindart-profile .profile-tabs {
   display: flex;
-  gap: 40px;
-  border-bottom: 1px solid #222222;
+  gap: var(--spacing-xl);
+  border-bottom: 1px solid var(--color-border-dark);
   padding-bottom: 0;
   flex-shrink: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.tindart-profile .profile-tabs::-webkit-scrollbar {
+  display: none;
 }
 
 .tindart-profile .tab-btn {
-  padding: 15px 0;
+  padding: var(--spacing-md) 0;
   border: none;
   background-color: transparent;
-  color: #888888;
-  font-size: 16px;
-  font-weight: 500;
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
   cursor: pointer;
   position: relative;
-  transition: color 0.3s ease;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  transition: color var(--transition-slow);
+  font-family: var(--font-family-primary);
+  white-space: nowrap;
 }
 
 .tindart-profile .tab-btn:hover {
-  color: #ffffff;
+  color: var(--color-text-primary);
 }
 
 .tindart-profile .tab-btn.active {
-  color: #ffffff;
+  color: var(--color-text-primary);
 }
 
 .tindart-profile .tab-btn.active::after {
@@ -214,16 +271,19 @@
   left: 0;
   right: 0;
   height: 4px;
-  background-color: #ffffff;
+  background-color: var(--color-text-primary);
+  border-radius: 2px 2px 0 0;
 }
 
-/* Portfolio grid basics */
+/* ============================================
+   PORTFOLIO GRID
+   ============================================ */
 .tindart-profile .portfolio-item {
   position: relative;
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
   cursor: pointer;
-  transition: transform 0.3s ease;
+  transition: transform var(--transition-slow);
   aspect-ratio: 1;
 }
 
@@ -233,18 +293,17 @@
   object-fit: cover;
 }
 
-/* Header row */
-.tindart-profile .profile-header-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-  margin-bottom: 20px;
-  flex-shrink: 0;
-}
+/* ============================================
+   RESPONSIVE - MOBILE FIRST
+   ============================================ */
 
-/* Responsive */
-@media (max-width: 768px) {
+/* Mobile (< 768px) */
+@media (max-width: 767px) {
+  .tindart-profile .profile-banner-container {
+    height: 200px;
+    min-height: 150px;
+  }
+
   .tindart-profile .profile-content-wrapper {
     flex-direction: column;
   }
@@ -252,16 +311,95 @@
   .tindart-profile .profile-info-column {
     width: 100%;
     border-right: none;
-    border-bottom: 1px solid #222222;
-    padding: 20px;
+    border-bottom: 1px solid var(--color-border-dark);
+    padding: var(--spacing-lg);
+    max-height: none;
+  }
+
+  .tindart-profile .profile-avatar-large {
+    width: 120px;
+    height: 120px;
+  }
+
+  .tindart-profile .profile-username {
+    font-size: var(--font-size-xl);
+  }
+
+  .tindart-profile .profile-stats {
+    flex-direction: row;
+    justify-content: space-around;
+    padding: var(--spacing-md) 0;
+  }
+
+  .tindart-profile .stat-item {
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    text-align: center;
   }
 
   .tindart-profile .portfolio-column {
-    padding: 20px;
+    padding: var(--spacing-md);
+  }
+
+  .tindart-profile .profile-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-md);
   }
 
   .tindart-profile .profile-tabs {
-    gap: 20px;
+    width: 100%;
+    gap: var(--spacing-md);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .tindart-profile .tab-btn {
+    font-size: var(--font-size-sm);
+    padding: var(--spacing-sm) 0;
+  }
+
+  .tindart-profile .profile-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .tindart-profile .editar-perfil-btn {
+    flex: 1;
+    text-align: center;
   }
 }
 
+/* Tablet (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .tindart-profile .profile-info-column {
+    width: 240px;
+    min-width: 200px;
+    padding: var(--spacing-lg);
+  }
+
+  .tindart-profile .profile-avatar-large {
+    width: 140px;
+    height: 140px;
+  }
+
+  .tindart-profile .portfolio-column {
+    padding: var(--spacing-md) var(--spacing-lg);
+  }
+
+  .tindart-profile .profile-tabs {
+    gap: var(--spacing-lg);
+  }
+}
+
+/* Desktop (> 1024px) */
+@media (min-width: 1024px) {
+  .tindart-profile .profile-info-column {
+    width: 280px;
+  }
+
+  .tindart-profile .profile-avatar-large {
+    width: 175px;
+    height: 175px;
+  }
+}

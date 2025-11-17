@@ -1,23 +1,32 @@
+/* ============================================
+   REGISTER PAGE
+   ============================================ */
 .LoginPage {
   display: flex;
   min-height: 100vh;
   width: 100%;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  font-family: var(--font-family-primary);
+  background: var(--gradient-auth);
   background-image: url("https://wallpapers.com/images/featured/arte-moderno-eua0t4x1os9lp8vr.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  align-items: center;
+  justify-content: flex-end;
+  padding: var(--spacing-md);
 }
 
-/* ----- Caja del formulario ----- */
+/* ============================================
+   REGISTER BOX
+   ============================================ */
 .LoginBox {
   background: rgba(46, 45, 52, 0.95);
-  padding: 40px 30px;
-  border-radius: 20px 0 0 20px;
-  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.25);
+  padding: var(--spacing-xl) var(--spacing-xl);
+  border-radius: var(--radius-xl) 0 0 var(--radius-xl);
+  box-shadow: var(--shadow-lg);
   width: 50%;
-  margin-left: auto; /* Se mantiene en la mitad derecha */
+  min-width: 400px;
+  max-width: 500px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -26,80 +35,99 @@
 .LoginBox form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: var(--spacing-md);
   width: 100%;
 }
 
 .LoginPage h1 {
-  color: #FFFFFF;
-  margin-bottom: 20px;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-lg);
   text-align: center;
-  font-size: 2rem;
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
 }
 
 .LoginPage h3 {
-  color: #FFFFFF;
-  font-size: 1rem;
+  color: var(--color-text-primary);
+  font-size: var(--font-size-base);
   margin-left: 15%;
-  margin-bottom: 5px;
+  margin-bottom: var(--spacing-xs);
+  font-weight: var(--font-weight-medium);
 }
 
 .LoginBox input {
-  background-color: #1B1B1F;
-  padding: 12px;
-  border: 1px solid #1B1B1F;
-  border-radius: 10px;
-  font-size: 14px;
+  background-color: var(--color-bg-secondary);
+  padding: var(--spacing-md);
+  border: 1px solid var(--color-bg-secondary);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
   outline: none;
-  transition: all 0.3s ease;
+  transition: all var(--transition-slow);
   width: 70%;
   margin: 0 auto;
-  color: #fff;
+  color: var(--color-text-primary);
 }
 
 .LoginBox input::placeholder {
-  color: #aaa;
+  color: var(--color-text-tertiary);
 }
 
 .LoginBox input:focus {
-  border-color: #667eea;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+  border-color: var(--color-accent-primary);
+  box-shadow: 0 0 8px rgba(154, 77, 255, 0.5);
 }
 
 .LoginBox button {
-  padding: 12px;
-  margin: 20px auto 0 auto;
+  padding: var(--spacing-md);
+  margin: var(--spacing-lg) auto 0 auto;
   border: none;
   width: 70%;
-  border-radius: 10px;
-  background: linear-gradient(90deg, #E36B63, #BA45E8);
-  color: #fff;
-  font-size: 1rem;
-  font-weight: bold;
+  border-radius: var(--radius-sm);
+  background: var(--gradient-primary);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: opacity var(--transition-slow);
 }
 
 .LoginBox button:hover {
-  background: #5563c1;
+  opacity: 0.9;
 }
 
 .RegisterText {
-  margin-top: 8%;
+  margin-top: var(--spacing-xl);
   text-align: center;
-  color: #fff;
-  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
 }
 
-/* =====================================
-   🧠 Responsividad
-===================================== */
+.RegisterText a {
+  color: var(--color-accent-secondary);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+  transition: color var(--transition-slow);
+}
+
+.RegisterText a:hover {
+  color: var(--color-accent-primary);
+  text-decoration: underline;
+}
+
+/* ============================================
+   RESPONSIVE - MOBILE FIRST
+   ============================================ */
 
 /* Tablets (pantallas medianas) */
 @media (max-width: 992px) {
+  .LoginPage {
+    justify-content: center;
+  }
+
   .LoginBox {
     width: 60%;
-    border-radius: 0;
+    min-width: 350px;
+    border-radius: var(--radius-xl);
   }
 
   .LoginBox input,
@@ -109,22 +137,25 @@
 }
 
 /* Celulares (pantallas pequeñas) */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .LoginPage {
     flex-direction: column;
     background-image: none;
-    background: linear-gradient(180deg, #667eea, #764ba2);
+    background: var(--gradient-auth);
     align-items: center;
     justify-content: center;
+    padding: var(--spacing-md);
   }
 
   .LoginBox {
     width: 90%;
+    min-width: 0;
+    max-width: 100%;
     height: auto;
-    margin: 40px auto;
-    padding: 25px 20px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    border-radius: 15px;
+    margin: var(--spacing-md) auto;
+    padding: var(--spacing-lg) var(--spacing-md);
+    box-shadow: var(--shadow-md);
+    border-radius: var(--radius-lg);
   }
 
   .LoginBox input,
@@ -133,44 +164,16 @@
   }
 
   .LoginPage h1 {
-    font-size: 1.6rem;
+    font-size: var(--font-size-3xl);
   }
 
   .LoginPage h3 {
-    font-size: 0.9rem;
+    font-size: var(--font-size-sm);
     margin-left: 10%;
   }
 
   .RegisterText {
-    font-size: 0.85rem;
-    margin-top: 5%;
+    font-size: var(--font-size-xs);
+    margin-top: var(--spacing-lg);
   }
 }
-
-.RegisterText {
-  margin-top: 30px;
-  text-align: center;
-  color: #ccc;
-  font-size: 0.95rem;
-}
-
-.RegisterText a {
-  color: #E36B63;
-  font-weight: 600;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.RegisterText a:hover {
-  color: #BA45E8;
-  text-decoration: underline;
-}
-
-/* En móviles, ajustamos tamaño y separación */
-@media (max-width: 768px) {
-  .RegisterText {
-    font-size: 0.9rem;
-    margin-top: 20px;
-  }
-}
-

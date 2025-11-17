@@ -1,135 +1,233 @@
-/* ───────────── Page ───────────── */
+/* ============================================
+   WHITEBOARD PAGE
+   ============================================ */
 .whiteboard-page {
   flex: 1;
-  padding: 40px 60px;
-  background-color: #1b1b1f;
-  color: #fff;
+  padding: var(--spacing-xl) var(--spacing-2xl);
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text-primary);
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: var(--spacing-xl);
   min-height: 100vh;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  border-radius: 20px;
+  font-family: var(--font-family-primary);
+  border-radius: var(--radius-xl);
+  width: 100%;
+  overflow-x: hidden;
 }
 
-/* ───────────── Header ───────────── */
+/* ============================================
+   WHITEBOARD HEADER
+   ============================================ */
 .whiteboard-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 95%;
+  max-width: 100%;
   width: 100%;
   margin: 0 auto;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
 }
 
 .whiteboard-header h2 {
-  font-size: 1.7rem;
-  font-weight: 600;
-  color: #fff;
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
 }
 
 .create-btn {
-  background: linear-gradient(90deg, #ff5f6d, #d63aff);
-  color: #fff;
-  font-weight: 600;
+  background: var(--gradient-primary);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-semibold);
   border: none;
-  border-radius: 12px;
-  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md) var(--spacing-lg);
   cursor: pointer;
-  font-size: 0.95rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 15px rgba(214, 58, 255, 0.3);
+  font-size: var(--font-size-sm);
+  transition: all var(--transition-slow);
+  box-shadow: 0 0 15px rgba(154, 77, 255, 0.3);
+  white-space: nowrap;
 }
 
 .create-btn:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 25px rgba(214, 58, 255, 0.5);
+  box-shadow: 0 0 25px rgba(154, 77, 255, 0.5);
 }
 
-/* ───────────── Grid ───────────── */
+/* ============================================
+   WHITEBOARD GRID
+   ============================================ */
 .whiteboard-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 50px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--spacing-xl);
   width: 100%;
-  max-width: 95%;
+  max-width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
 
-/* ───────────── Card ───────────── */
+/* ============================================
+   WHITEBOARD CARD
+   ============================================ */
 .whiteboard-card {
-  background: #222228;
-  border-radius: 16px;
-  padding: 18px;
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  transition: all 0.3s ease;
+  transition: all var(--transition-slow);
   cursor: pointer;
   border: 1px solid transparent;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-sm);
+  width: 100%;
 }
 
 .whiteboard-card:hover {
-  border: 1px solid #541b63;
+  border: 1px solid var(--color-accent-primary);
   transform: translateY(-4px);
-  box-shadow: 0 0 20px rgba(214, 58, 255, 0.25);
+  box-shadow: 0 0 20px rgba(154, 77, 255, 0.25);
 }
 
 .whiteboard-thumbnail {
   width: 100%;
   height: 160px;
-  background: linear-gradient(135deg, #2a2a30, #1e1e22);
-  border-radius: 12px;
-  margin-bottom: 12px;
+  min-height: 120px;
+  background: linear-gradient(135deg, var(--color-bg-tertiary), var(--color-bg-secondary));
+  border-radius: var(--radius-md);
+  margin-bottom: var(--spacing-md);
   box-shadow: 0 0 12px rgba(255, 255, 255, 0.05);
 }
 
 .whiteboard-name {
-  font-size: 1rem;
-  font-weight: 500;
-  color: #e2e2e2;
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
   margin-bottom: 0;
-}
-.whiteboard-desc {
-  font-size: 0.8rem;
-  /* font-weight: ; */
-  align-self: flex-start;
-  color: #e2e2e2;
-  margin-bottom: 0;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-/* ───────────── MUI Overrides ───────────── */
+.whiteboard-desc {
+  font-size: var(--font-size-sm);
+  align-self: flex-start;
+  color: var(--color-text-tertiary);
+  margin-bottom: 0;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  text-align: left;
+  margin-top: var(--spacing-xs);
+}
+
+/* ============================================
+   MUI OVERRIDES
+   ============================================ */
 .MuiDialog-paper {
-  background-color: #242429 !important;
-  color: #fff !important;
-  border-radius: 16px !important;
+  background-color: var(--color-bg-tertiary) !important;
+  color: var(--color-text-primary) !important;
+  border-radius: var(--radius-lg) !important;
 }
 
 .MuiInputBase-input {
-  color: #fff !important;
+  color: var(--color-text-primary) !important;
 }
 
 .MuiInputLabel-root {
-  color: #aaa !important;
+  color: var(--color-text-tertiary) !important;
 }
 
 .MuiOutlinedInput-root fieldset {
-  border-color: #555 !important;
+  border-color: var(--color-text-quaternary) !important;
 }
 
 .MuiOutlinedInput-root:hover fieldset {
-  border-color: #d63aff !important;
+  border-color: var(--color-accent-primary) !important;
 }
 
 .MuiButton-containedPrimary {
-  background: linear-gradient(90deg, #ff5f6d, #d63aff) !important;
-  color: white !important;
-  font-weight: 600 !important;
+  background: var(--gradient-primary) !important;
+  color: var(--color-text-primary) !important;
+  font-weight: var(--font-weight-semibold) !important;
 }
 
 .MuiButton-containedPrimary:hover {
-  box-shadow: 0 0 15px rgba(214, 58, 255, 0.5) !important;
+  box-shadow: 0 0 15px rgba(154, 77, 255, 0.5) !important;
+}
+
+/* ============================================
+   RESPONSIVE - MOBILE FIRST
+   ============================================ */
+
+/* Mobile (< 768px) */
+@media (max-width: 767px) {
+  .whiteboard-page {
+    padding: var(--spacing-md);
+    gap: var(--spacing-lg);
+    border-radius: 0;
+  }
+
+  .whiteboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .whiteboard-header h2 {
+    font-size: var(--font-size-2xl);
+  }
+
+  .create-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .whiteboard-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: var(--spacing-md);
+  }
+
+  .whiteboard-thumbnail {
+    height: 120px;
+  }
+
+  .whiteboard-name {
+    font-size: var(--font-size-sm);
+  }
+
+  .whiteboard-desc {
+    font-size: var(--font-size-xs);
+  }
+}
+
+/* Tablet (768px - 1024px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .whiteboard-page {
+    padding: var(--spacing-lg) var(--spacing-xl);
+  }
+
+  .whiteboard-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: var(--spacing-lg);
+  }
+}
+
+/* Desktop (> 1024px) */
+@media (min-width: 1024px) {
+  .whiteboard-page {
+    padding: var(--spacing-xl) var(--spacing-2xl);
+  }
+
+  .whiteboard-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: var(--spacing-xl);
+  }
 }

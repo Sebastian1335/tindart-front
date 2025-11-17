@@ -1,25 +1,178 @@
-/* global.css */
-html, body, #root {
+/* ============================================
+   VARIABLES CSS - Colores, Tipografía, Espaciados
+   ============================================ */
+:root {
+  /* Colores principales - Unificados */
+  --color-bg-primary: #0e0e10;
+  --color-bg-secondary: #1b1b1f;
+  --color-bg-tertiary: #2a2a30;
+  --color-bg-quaternary: #34343a;
+  
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #cccccc;
+  --color-text-tertiary: #888888;
+  --color-text-quaternary: #666666;
+  
+  --color-border: #2c2c2f;
+  --color-border-light: #3a3a3a;
+  --color-border-dark: #222222;
+  
+  /* Gradientes unificados */
+  --gradient-primary: linear-gradient(90deg, #9a4dff, #ff6cab);
+  --gradient-secondary: linear-gradient(90deg, #ff6cab, #9a4dff);
+  --gradient-auth: linear-gradient(135deg, #667eea, #764ba2);
+  
+  /* Colores de acento */
+  --color-accent-primary: #9a4dff;
+  --color-accent-secondary: #ff6cab;
+  --color-accent-danger: #ff4757;
+  --color-accent-success: #2ed573;
+  
+  /* Tipografía */
+  --font-family-primary: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  --font-family-heading: "Poppins", sans-serif;
+  
+  --font-size-xs: 0.75rem;    /* 12px */
+  --font-size-sm: 0.875rem;   /* 14px */
+  --font-size-base: 1rem;     /* 16px */
+  --font-size-lg: 1.125rem;   /* 18px */
+  --font-size-xl: 1.25rem;    /* 20px */
+  --font-size-2xl: 1.5rem;    /* 24px */
+  --font-size-3xl: 1.75rem;   /* 28px */
+  --font-size-4xl: 2rem;      /* 32px */
+  
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  /* Espaciados - Múltiplos de 4px */
+  --spacing-xs: 0.25rem;   /* 4px */
+  --spacing-sm: 0.5rem;    /* 8px */
+  --spacing-md: 1rem;      /* 16px */
+  --spacing-lg: 1.5rem;    /* 24px */
+  --spacing-xl: 2rem;      /* 32px */
+  --spacing-2xl: 3rem;     /* 48px */
+  --spacing-3xl: 4rem;     /* 64px */
+  
+  /* Border radius - Escala consistente */
+  --radius-sm: 0.5rem;     /* 8px */
+  --radius-md: 0.75rem;    /* 12px */
+  --radius-lg: 1rem;       /* 16px */
+  --radius-xl: 1.5rem;     /* 24px */
+  --radius-full: 9999px;   /* Circular */
+  
+  /* Sombras */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 12px 30px rgba(0, 0, 0, 0.35);
+  
+  /* Transiciones */
+  --transition-fast: 0.15s ease;
+  --transition-base: 0.2s ease;
+  --transition-slow: 0.3s ease;
+  
+  /* Breakpoints (para uso en media queries) */
+  --breakpoint-mobile: 768px;
+  --breakpoint-tablet: 1024px;
+  --breakpoint-desktop: 1280px;
+}
+
+/* ============================================
+   RESET Y NORMALIZACIÓN
+   ============================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  overflow: hidden;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
   height: 100%;
+  width: 100%;
+  overflow-x: hidden; /* Prevenir scroll horizontal */
+  font-family: var(--font-family-primary);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-primary);
 }
 
 body {
   background-color: #2E2D34;
-}
-/* Reset básico opcional */
-* {
-  box-sizing: inherit;
+  line-height: 1.5;
 }
 
-
-
-/* Otros estilos globales */
+/* ============================================
+   ELEMENTOS BASE
+   ============================================ */
 a {
   text-decoration: none;
   color: inherit;
+  transition: opacity var(--transition-fast);
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  outline: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ============================================
+   UTILIDADES GLOBALES
+   ============================================ */
+/* Prevenir scroll horizontal en todos los contenedores */
+* {
+  max-width: 100%;
+}
+
+/* Scrollbar personalizado global */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-bg-tertiary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-bg-quaternary);
 } 
