@@ -6,6 +6,8 @@ import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import { useAuthStore, useProfileStore } from "../../../Auth/store/authStore";
 import { useFeed } from "../../store/feedStore";
 import { DetailModal } from "../../componentes/detailModal/detailModal";
+import { EditProfileModal } from "../../componentes/profile/EditProfileModal";
+
 
 function srcset(image, size, rows = 1, cols = 1) {
     return {
@@ -22,7 +24,7 @@ export default function ProfilePage() {
     const selectedPost = useFeed((state) => state.selectedPost);
     const selectPost = useFeed((state) => state.selectPost);
     const user = useAuthStore((state) => state.user);
-
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const fetchPortfolio = useFeed((state) => state.fetchPortfolio);
     const fetchLikedPosts = useFeed((state) => state.fetchLikedPosts);
     const fetchSavedPosts = useFeed((state) => state.fetchSavedPosts);
@@ -159,7 +161,10 @@ export default function ProfilePage() {
 
                             {/* Action Buttons */}
                             <div className="profile-actions">
-                                <button className="editar-perfil-btn">
+                                <button 
+                                    className="editar-perfil-btn"
+                                    onClick={() => setIsEditModalOpen(true)}
+                                >
                                     Editar Perfil
                                 </button>
                                 <button className="icon-btn">
@@ -222,6 +227,11 @@ export default function ProfilePage() {
                     </div>
                 </div>
             </div>
+            <EditProfileModal 
+                isOpen={isEditModalOpen}
+                onClose={() => setIsEditModalOpen(false)}
+                userProfileData={userProfileData}
+            />
         </>
     );
 }
