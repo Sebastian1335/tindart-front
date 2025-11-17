@@ -8,6 +8,7 @@ import { Chat } from "../pages/chat/Chat";
 import { Tienda } from "../pages/tienda/Tienda";
 import { useAuthStore, useProfileStore } from "../../Auth/store/authStore";
 import { useEffect } from "react";
+import { Dashboard } from "../pages/dashboard/Dashboard";
 
 export const TindartRoutes = () => {
     const user = useAuthStore((state) => state.user);
@@ -25,6 +26,7 @@ export const TindartRoutes = () => {
                 <Route path="/whiteboard" element={<Whiteboard />} />
                 <Route path="/tienda" element={<Tienda />} />
                 <Route path="/chat" element={<Chat />} />
+                <Route path="/dashboard" element={<Dashboard />} />
             </Route>
         </Routes>
     );

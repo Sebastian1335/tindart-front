@@ -32,9 +32,12 @@ export const NavBar = ({profilePopoverOpen, setProfilePopoverOpen, handleOpenPub
           </a>
           <Link to={"/feed/whiteboardList"}>Whiteboard</Link>
            <Link to={"/feed/tienda"}>Tienda</Link>
+           
+       
         </div>
 
         <div className="nav-icons">
+          <Link to={"/feed/dashboard"} className="nav-icon-btn dashboard-btn">Dashboard</Link>
           <button className="nav-icon-btn help-btn">
             <ChatBubbleOutlineIcon sx={{ fontSize: 18 }} />
             <span>Ayuda</span>

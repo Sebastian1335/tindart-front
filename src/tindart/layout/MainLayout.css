@@ -151,6 +151,17 @@
   align-items: center;
 }
 
+.dashboard-btn {
+  background: var(--gradient-primary);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-semibold);
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-xl);
+  gap: var(--spacing-sm);
+  display: flex;
+  align-items: center;
+}
+
 .help-btn:hover {
   background: var(--color-bg-quaternary);
 }
