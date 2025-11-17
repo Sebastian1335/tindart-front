@@ -101,7 +101,6 @@ export const useFeed = create((set) => ({
                     },
                 },
             };
-            console.log(updated)
             return { selectedPost: updated };
         }),
     toggleLikeComment: (index) =>
@@ -171,7 +170,6 @@ export const useFeed = create((set) => ({
         set((state) => {
             if (!state.selectedPost) return {};
             const nextState = !!!state.selectedPost.user.followers;
-            console.log(nextState)
             const updated = {
                 ...state.selectedPost,
                 user: {

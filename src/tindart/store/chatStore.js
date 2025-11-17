@@ -16,7 +16,6 @@ export const useChatStore = create((set, get) => ({
     getContacts: async () => {
         try {
             const res = await apiClient(`/chat/contacts`, { method: "GET" });
-            console.log(res)
             set({ users: res || [] });
         } catch (err) {
             console.error("getContacts error", err);

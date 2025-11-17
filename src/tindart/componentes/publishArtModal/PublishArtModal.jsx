@@ -58,7 +58,6 @@ const PublishArtModal = ({ open, onClose }) => {
     )
 
     const updatedForm = { ...form, tags: formattedTags }
-    console.log("Publishing:", updatedForm)
 
     const data = new FormData()
     Object.entries(updatedForm).forEach(([key, value]) => {
