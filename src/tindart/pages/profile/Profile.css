@@ -157,6 +157,19 @@
   background: linear-gradient(var(--color-bg-secondary), var(--color-bg-secondary)) padding-box,
     var(--gradient-primary) border-box;
 }
+.tindart-profile .seguir-btn-activate {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  color: var(--color-text-primary);
+  border-radius: var(--radius-xl);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: all var(--transition-slow);
+  width: 100%;
+  margin-top: var(--spacing-md);
+  border: 1px solid transparent;
+  background: var(--gradient-primary);
+}
 
 .tindart-profile .seguir-btn:hover {
   background: var(--gradient-primary);

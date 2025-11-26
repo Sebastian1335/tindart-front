@@ -68,11 +68,11 @@ export const DetailModal = () => {
                     <div className="post-content">
                         <h1 className="post-title">{selectedPost?.title}</h1>
                         <div className="post-header">
-                            <div className="author-info" onClick={onClickAuthorProfile}>
+                            <div className="author-info">
                                 <img
                                     src={selectedPost?.user?.avatar || "/icono.png"}
                                     className="author-avatar"
-                                />
+                                onClick={onClickAuthorProfile} />
                                 <div className="author-text">
                                     <span className="author-name">
                                         {selectedPost?.user?.userName || "Autor desconocido"}
@@ -199,7 +199,7 @@ export const DetailModal = () => {
                             <div className="comments-list">
                                 {selectedPost?.comments?.map(
                                     (comment, index) => (
-                                        <Comment comment={comment} index={index} key={index}/>
+                                        <Comment comment={comment} index={index} key={index} onClickAuthorProfile={onClickAuthorProfile}/>
                                     )
                                 )}
                             </div>

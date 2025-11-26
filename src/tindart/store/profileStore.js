@@ -18,11 +18,17 @@ export const useProfileStore = create(persist((set) => ({
             }else{
                 set({ userProfileData: data });
             }
-            console.log("userData actualizado:", useProfileStore.getState().userData);
-            console.log("userProfileData actualizado:", useProfileStore.getState().userProfileData);
         } finally {
             set({ loading: false });
         }
     },
+    toggleFollow: () => {set((state) => {
+        const nextState = state.userProfileData.followers.length === 0 ? [{}]: []; 
+        const updated = {
+            ...state.userProfileData,
+            followers: nextState
+        }
+        return {userProfileData: updated}
+    })},
     setUserProfileData: (data) => {set({userProfileData: data})}
 })));

@@ -8,6 +8,7 @@ import { useFeed } from "../../store/feedStore";
 import { DetailModal } from "../../componentes/detailModal/detailModal";
 import { EditProfileModal } from "../../componentes/profile/EditProfileModal";
 import { useAuthStore } from "../../../Auth/store/authStore";
+import { fetchToggleFollowUser } from "../../api/postRequiest";
 
 
 function srcset(image, size, rows = 1, cols = 1) {
@@ -32,7 +33,7 @@ export default function ProfilePage() {
     const loading = useProfileStore((state) => state.loading);
     const userProfileData = useProfileStore((state) => state.userProfileData);
     const userData = useProfileStore((state) => state.userData)
-    
+    const toggleFollow = useProfileStore((state) => state.toggleFollow)
     useEffect(() => {
         const id = userProfileData === null ? userData.id : userProfileData.id
         switch (activeTab) {
@@ -104,11 +105,18 @@ export default function ProfilePage() {
                             </div>
                         </div>
                         {
-                            user.id === ((userProfileData) ? userData.id : -1) ? 
-                            <button className="seguir-btn">Seguir</button>
-                            :
-                            (<></>)
-                            
+                            userProfileData && (user.id !== userProfileData.id || userProfileData.id !== userData.id) && (
+                                <button
+                                className={`seguir-btn${userProfileData.followers.length === 0 ? "" : "-activate"}`}
+                                onClick={() => {
+                                    fetchToggleFollowUser(userProfileData.id);
+                                    toggleFollow();
+                                }}
+                                >
+                                {userProfileData?.followers.length === 0 ? "Seguir" : "Siguiendo"}
+                                </button>
+                            )
+
                         }
                     </div>
 
