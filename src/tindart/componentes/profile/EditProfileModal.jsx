@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import {useProfileStore } from "../../../Auth/store/authStore";
+import { useProfileStore } from "../../store/profileStore";
 import "./EditProfileModal.css";
 import CloseIcon from '@mui/icons-material/Close';
 import FileUploadIcon from '@mui/icons-material/FileUpload';

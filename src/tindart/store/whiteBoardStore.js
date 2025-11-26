@@ -1,6 +1,5 @@
 import { create } from "zustand";
 import { getSnapshot, getWhiteboards } from "../api/getRequest";
-import { useAuthStore } from "../../Auth/store/authStore";
 import { createWhiteboard } from "../api/postRequiest";
 import { updateWhiteboard } from "../api/putRequest";
 import { persist } from "zustand/middleware";
@@ -22,7 +21,6 @@ export const useWhiteboardStore = create(
                 }
             } catch {
                 set({ error: error.message });
-                console.log(error);
             } finally {
                 set({ loading: false });
             }
@@ -32,7 +30,6 @@ export const useWhiteboardStore = create(
                 updateWhiteboard(whiteboard);
             } catch (error) {
                 set({ error: error.message });
-                console.log(error);
             }
         },
         createWhiteboard: async (whiteboard) => {
@@ -42,7 +39,6 @@ export const useWhiteboardStore = create(
                 fetchWhiteBoardList()
             } catch (error) {
                 set({ error: error.message });
-                console.log(error);
             }
         },
         selectWhiteBoard: (whiteboard) => {
@@ -59,7 +55,6 @@ export const useWhiteboardStore = create(
                 }));
             } catch (error) {
                 set({ error: error.message });
-                console.log(error);
             }
         },
     }),

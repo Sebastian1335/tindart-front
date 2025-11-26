@@ -6,14 +6,14 @@ import { WhiteboardList } from "../pages/whiteboardList/WhiteboardList";
 import { Whiteboard } from "../pages/whiteboard/Whiteboard";
 import { Chat } from "../pages/chat/Chat";
 import { Tienda } from "../pages/tienda/Tienda";
-import { useAuthStore, useProfileStore } from "../../Auth/store/authStore";
+import { useAuthStore } from "../../Auth/store/authStore";
+import { useProfileStore } from "../store/profileStore";
 import { useEffect } from "react";
 import { Dashboard } from "../pages/dashboard/Dashboard";
 
 export const TindartRoutes = () => {
     const user = useAuthStore((state) => state.user);
     const fetchProfileData = useProfileStore((state) => state.fetchProfileData)
-
     useEffect(() => {
         fetchProfileData(user.id)
     }, [])

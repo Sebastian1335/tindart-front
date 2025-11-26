@@ -1,7 +1,8 @@
 import { Navigate, Route, Routes } from "react-router";
 import { AuthRoutes } from "./Auth/routes/AuthRoutes";
 import { TindartRoutes } from "./tindart/routes/TindartRoutes";
-import { useAuthStore, useProfileStore } from "./Auth/store/authStore";
+import { useAuthStore } from "./Auth/store/authStore";
+import { useProfileStore } from "./tindart/store/profileStore";
 
 export const Router = () => {
     const token = useAuthStore((state) => state.token);

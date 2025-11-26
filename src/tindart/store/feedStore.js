@@ -41,21 +41,21 @@ export const useFeed = create((set) => ({
     fetchFeed: (page, limit) =>
         fetchData(() => fetchWithAuth("feed", page, limit), set),
 
-    fetchPortfolio: (page, limit) =>
+    fetchPortfolio: (page, limit, id) =>
         fetchData(
-            () => fetchWithAuth("profile/portafolio", page, limit),
+            () => fetchWithAuth(`profile/portafolio/${id}`, page, limit),
             set
         ),
 
-    fetchLikedPosts: (page, limit) =>
+    fetchLikedPosts: (page, limit, id) =>
         fetchData(
-            () => fetchWithAuth("profile/likedPosts",  page, limit),
+            () => fetchWithAuth(`profile/likedPosts/${id}`,  page, limit),
             set
         ),
 
-    fetchSavedPosts: (page, limit) =>
+    fetchSavedPosts: (page, limit, id) =>
         fetchData(
-            () => fetchWithAuth("profile/savedPosts",  page, limit),
+            () => fetchWithAuth(`profile/savedPosts/${id}`,  page, limit),
             set
         ),
 

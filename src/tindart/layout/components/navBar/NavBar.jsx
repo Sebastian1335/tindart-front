@@ -2,12 +2,27 @@ import SettingsIcon from "@mui/icons-material/Settings"
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone"
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline"
 import EmailIcon from '@mui/icons-material/Email';
-import { Link } from "react-router"
-import { ProfilePopOver } from "../profilePopOver/profilePopOver"
+import { Link, useNavigate } from "react-router"
+import { ProfilePopOver } from "../profilePopOver/ProfilePopOver"
 import { useState } from "react"
 import { SettingsPopOver } from "../settingsPopOver/SettingsPopOver"
+import { useProfileStore } from "../../../store/profileStore";
+import { useAuthStore } from "../../../../Auth/store/authStore";
+
+
 export const NavBar = ({profilePopoverOpen, setProfilePopoverOpen, handleOpenPublishModal}) => {
   const [settingsOpen, setSettingsOpen] = useState(false)
+  const navigate = useNavigate()
+  const fetchProfileData = useProfileStore((state) => state.fetchProfileData);
+  const {user} = useAuthStore.getState()
+  const setUserProfileData = useProfileStore((state) => state.setUserProfileData)
+
+  const onClickProfile = () => {
+    console.log(user)
+    fetchProfileData(user.id)
+    setUserProfileData(null)
+    navigate("/feed/Profile");
+  }
   return (
     <nav className="navbar">
         <h2>
@@ -65,12 +80,12 @@ export const NavBar = ({profilePopoverOpen, setProfilePopoverOpen, handleOpenPub
             onMouseEnter={() => setProfilePopoverOpen(true)}
             onMouseLeave={() => setProfilePopoverOpen(false)}
           >
-          <Link to="/feed/Profile" className="nav-icon-btn profile-btn">
+          <div to="/feed/Profile" className="nav-icon-btn profile-btn" onClick={onClickProfile}>
             <img src="/icono.png" alt="Profile" />
             <span>Profile</span>
-          </Link>
+          </div>
 
-  {profilePopoverOpen && <ProfilePopOver />}
+          {profilePopoverOpen && <ProfilePopOver />}
 </div>
         </div>
       </nav>

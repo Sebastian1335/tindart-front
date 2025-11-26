@@ -12,6 +12,8 @@ import { useEffect } from "react";
 import { useAuthStore } from "../../../Auth/store/authStore";
 import { useForm } from "../../../hooks/useForm";
 import { fetchToggleFollowUser, fetchToggleLike, fetchToggleSave, fetchToggleShare } from "../../api/postRequiest";
+import { useNavigate } from "react-router";
+import { useProfileStore } from "../../store/profileStore";
 
 const initialValues = {
     content: ""
@@ -31,11 +33,11 @@ export const DetailModal = () => {
     const toggleSave = useFeed((state) => state.toggleSave)
     const toggleShare = useFeed((state) => state.toggleShare)
     const toggleFollow = useFeed((state) => state.toggleFollow)
-    const token = useAuthStore((state) => state.token)
     const publishComment = postComment((state) => (state.publishComment))
     const pushComment = useFeed((state) => state.pushComment)
     const user = useAuthStore((state) => state.user)
-
+    const fetchProfileData = useProfileStore((state) => state.fetchProfileData)
+    const navigate = useNavigate()
 
     useEffect(() => {
         postDetails(selectedPost.id)
@@ -51,7 +53,11 @@ export const DetailModal = () => {
         pushComment(res)
         setForm(initialValues)
     }
-
+    const onClickAuthorProfile = async (e) => {
+        navigate("/feed/Profile")
+        selectPost(null)
+        fetchProfileData(selectedPost.user.id)
+    }
     return (
         <>
             <Modal open={!!selectPost} onClose={diselectPost}>
@@ -62,7 +68,7 @@ export const DetailModal = () => {
                     <div className="post-content">
                         <h1 className="post-title">{selectedPost?.title}</h1>
                         <div className="post-header">
-                            <div className="author-info">
+                            <div className="author-info" onClick={onClickAuthorProfile}>
                                 <img
                                     src={selectedPost?.user?.avatar || "/icono.png"}
                                     className="author-avatar"

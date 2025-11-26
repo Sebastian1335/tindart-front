@@ -4,6 +4,7 @@ import "./Feed.css";
 import { useFeed } from "../../store/feedStore";
 import { DetailModal } from "../../componentes/detailModal/detailModal";
 import { useEffect } from "react";
+import { useProfileStore } from "../../store/profileStore";
 
 function srcset(image, size, rows = 1, cols = 1) {
     return {
@@ -20,6 +21,7 @@ export const Feed = () => {
     const selectedPost = useFeed((state) => state.selectedPost);
     const selectPost = useFeed((state) => state.selectPost);
     const fetchFeed = useFeed((state) => state.fetchFeed);
+    const userData = useProfileStore((state) => state.userData)
     useEffect(() => {
         fetchFeed(1, 20);
     }, []);

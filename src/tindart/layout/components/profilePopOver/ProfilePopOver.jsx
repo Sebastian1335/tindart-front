@@ -1,8 +1,8 @@
-import { useProfileStore } from "../../../../Auth/store/authStore";
+import { useProfileStore } from "../../../store/profileStore";
 
 export const ProfilePopOver = () => {
 
-    const userProfileData = useProfileStore((state) => state.userProfileData)
+    const userData = useProfileStore((state) => state.userData)
     
     return (
         <div className="profile-popover">
@@ -11,21 +11,21 @@ export const ProfilePopOver = () => {
             </div>
             {/* Aca seria ver como se le haria la logica de followers y demas */}
             <div className="profile-popover-content">
-                <h3 className="profile-popover-name">{userProfileData.userName}</h3>
-                <p className="profile-popover-handle">@{userProfileData.userName}</p>
+                <h3 className="profile-popover-name">{userData.userName}</h3>
+                <p className="profile-popover-handle">@{userData.userName}</p>
                 <div className="profile-popover-stats">
                     <div className="stat">
                         <span className="stat-label">Seguidores</span>
-                        <span className="stat-value">{userProfileData.extra.followers}</span>
+                        <span className="stat-value">{userData.extra.followers}</span>
                     </div>
                     <div className="stat">
                         {/* Imposible que salga esto por el momento */}
                         <span className="stat-label">Me gusta</span>
-                        <span className="stat-value">{userProfileData.extra.totalLikesReceived}</span>
+                        <span className="stat-value">{userData.extra.totalLikesReceived}</span>
                     </div>
                     <div className="stat">
                         <span className="stat-label">Siguiendo</span>
-                        <span className="stat-value">{userProfileData.extra.following}</span>
+                        <span className="stat-value">{userData.extra.following}</span>
                     </div>
                 </div>
             </div>

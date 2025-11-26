@@ -7,13 +7,13 @@ import { NavBar } from "./components/navBar/NavBar"
 import { SideBar } from "./components/sideBar/SideBar"
 import ChatDock from "../componentes/chat/ChatDock"
 import { useChatStore } from "../store/chatStore"
+
 const formValues = {
   busqueda: "",
 }
 
 export const MainLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [formState, setFormState] = useState(formValues)
   const [publishModalOpen, setPublishModalOpen] = useState(false)
   const [profilePopoverOpen, setProfilePopoverOpen] = useState(false)
   const location = useLocation()   

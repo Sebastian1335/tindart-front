@@ -50,18 +50,3 @@ export const useAuthStore = create(
         }
     )
 );
-
-export const useProfileStore = create((set) => ({
-    userProfileData: null,
-    loading: false,
-    fetchProfileData: async (id) => {
-        const { token } = useAuthStore.getState();
-        set({ loading: true });
-        try {
-            const data = await getProfileData(id, token);
-            set({ userProfileData: data });
-        } finally {
-            set({ loading: false });
-        }
-    },
-}));

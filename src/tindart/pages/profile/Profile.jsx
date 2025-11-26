@@ -3,10 +3,11 @@ import { ImageList, ImageListItem } from "@mui/material";
 import "./Profile.css";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
-import { useAuthStore, useProfileStore } from "../../../Auth/store/authStore";
+import { useProfileStore } from "../../store/profileStore";
 import { useFeed } from "../../store/feedStore";
 import { DetailModal } from "../../componentes/detailModal/detailModal";
 import { EditProfileModal } from "../../componentes/profile/EditProfileModal";
+import { useAuthStore } from "../../../Auth/store/authStore";
 
 
 function srcset(image, size, rows = 1, cols = 1) {
@@ -23,38 +24,30 @@ export default function ProfilePage() {
     const feed = useFeed((state) => state.feed);
     const selectedPost = useFeed((state) => state.selectedPost);
     const selectPost = useFeed((state) => state.selectPost);
-    const user = useAuthStore((state) => state.user);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const fetchPortfolio = useFeed((state) => state.fetchPortfolio);
     const fetchLikedPosts = useFeed((state) => state.fetchLikedPosts);
     const fetchSavedPosts = useFeed((state) => state.fetchSavedPosts);
-    const fetchComisiones = useFeed((state) => state.fetchComisiones);
-
+    const user = useAuthStore((state) => state.user)
     const loading = useProfileStore((state) => state.loading);
     const userProfileData = useProfileStore((state) => state.userProfileData);
-    const fetchProfileData = useProfileStore((state) => state.fetchProfileData);
-
+    const userData = useProfileStore((state) => state.userData)
+    
     useEffect(() => {
-        fetchProfileData(user.id);
-    }, []);
-
-    useEffect(() => {
+        const id = userProfileData === null ? userData.id : userProfileData.id
         switch (activeTab) {
             case "portfolio":
-                fetchPortfolio(1, 20);
-                break;
-            case "comisiones":
-                // fetchComisiones(1, 20);
+                fetchPortfolio(1, 20, id);
                 break;
             case "liked":
-                fetchLikedPosts(1, 20);
+                fetchLikedPosts(1, 20, id);
                 break;
             case "guardados":
-                fetchSavedPosts(1, 20);
+                fetchSavedPosts(1, 20, id);
                 break;
         }
-    }, [activeTab]);
-    if (loading || !userProfileData) {
+    }, [activeTab, userProfileData, userData]);
+    if (loading) {
         return <div className="loading">Cargando perfil...</div>;
     }
 
@@ -80,38 +73,43 @@ export default function ProfilePage() {
                         </div>
 
                         <h1 className="profile-username">
-                            {userProfileData.userName}
+                            {(userProfileData) ? userProfileData.userName : userData.userName}
                         </h1>
                         <p className="profile-handle">
-                            @{userProfileData.userName}
+                            @{(userProfileData) ? userProfileData.userName : userData.userName}
                         </p>
 
                         <p className="profile-description">
-                            {userProfileData.extra.description}
+                            {(userProfileData) ? userProfileData.extra.description : userData.extra.description}
                         </p>
 
                         <div className="profile-stats">
                             <div className="stat-item">
                                 <span className="stat-label">Seguidores</span>
                                 <span className="stat-value">
-                                    {userProfileData.extra.followers}
+                                    {(userProfileData) ? userProfileData.extra.followers : userData.extra.followers}
                                 </span>
                             </div>
                             <div className="stat-item">
                                 <span className="stat-label">Me gusta</span>
                                 <span className="stat-value">
-                                    {userProfileData.extra.totalLikesReceived}
+                                    {(userProfileData) ? userProfileData.extra.totalLikesReceived : userData.extra.totalLikesReceived}
                                 </span>
                             </div>
                             <div className="stat-item">
                                 <span className="stat-label">Siguiendo</span>
                                 <span className="stat-value">
-                                    {userProfileData.extra.following}
+                                    {(userProfileData) ? userProfileData.extra.following : userData.extra.following}
                                 </span>
                             </div>
                         </div>
-
-                        <button className="seguir-btn">Seguir</button>
+                        {
+                            user.id === ((userProfileData) ? userData.id : -1) ? 
+                            <button className="seguir-btn">Seguir</button>
+                            :
+                            (<></>)
+                            
+                        }
                     </div>
 
                     {/* Right Column: Portfolio Grid */}
@@ -160,20 +158,26 @@ export default function ProfilePage() {
                             </div>
 
                             {/* Action Buttons */}
-                            <div className="profile-actions">
-                                <button 
-                                    className="editar-perfil-btn"
-                                    onClick={() => setIsEditModalOpen(true)}
-                                >
-                                    Editar Perfil
-                                </button>
-                                <button className="icon-btn">
-                                    <MoreVertIcon sx={{ fontSize: 20 }} />
-                                </button>
-                                <button className="icon-btn">
-                                    <MailOutlineIcon sx={{ fontSize: 20 }} />
-                                </button>
-                            </div>
+                            {
+                                user.id !== ((userProfileData) ? userData.id : -1) ? 
+                                <div className="profile-actions">
+                                    <button 
+                                        className="editar-perfil-btn"
+                                        onClick={() => setIsEditModalOpen(true)}
+                                    >
+                                        Editar Perfil
+                                    </button>
+                                    <button className="icon-btn">
+                                        <MoreVertIcon sx={{ fontSize: 20 }} />
+                                    </button>
+                                    <button className="icon-btn">
+                                        <MailOutlineIcon sx={{ fontSize: 20 }} />
+                                    </button>
+                                </div>
+                                :
+                                <></>
+
+                            }
                         </div>
 
                         <ImageList
@@ -230,7 +234,7 @@ export default function ProfilePage() {
             <EditProfileModal 
                 isOpen={isEditModalOpen}
                 onClose={() => setIsEditModalOpen(false)}
-                userProfileData={userProfileData}
+                userProfileData={userData}
             />
         </>
     );
